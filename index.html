@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'pa-bg': '#080B10',
+            'pa-surface': '#0D1117',
+            'pa-border': '#1C2333',
+            'pa-accent': '#4F8EF7',
+            'pa-accent2': '#7C5CFC',
+            'pa-muted': '#8B949E',
+            'pa-text': '#E6EDF3',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+          },
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: #080B10;
+      color: #E6EDF3;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #080B10; }
+    ::-webkit-scrollbar-thumb { background: #1C2333; border-radius: 2px; }
+
+    /* Nav */
+    #nav-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      transition: background 0.4s, backdrop-filter 0.4s, border-color 0.4s;
+    }
+    #nav-bar.scrolled {
+      background: rgba(8, 11, 16, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid #1C2333;
+    }
+
+    /* Three.js Canvas */
+    #hero-canvas {
+      position: absolute; inset: 0; z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Glass card */
+    .glass {
+      background: rgba(13, 17, 23, 0.7);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(79, 142, 247, 0.12);
+    }
+    .glass-strong {
+      background: rgba(13, 17, 23, 0.9);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(79, 142, 247, 0.18);
+    }
+
+    /* Glow effects */
+    .glow-blue { box-shadow: 0 0 40px rgba(79, 142, 247, 0.15), 0 0 80px rgba(79, 142, 247, 0.05); }
+    .glow-purple { box-shadow: 0 0 40px rgba(124, 92, 252, 0.15), 0 0 80px rgba(124, 92, 252, 0.05); }
+    .text-glow { text-shadow: 0 0 40px rgba(79, 142, 247, 0.5); }
+
+    /* Gradient text */
+    .gradient-text {
+      background: linear-gradient(135deg, #E6EDF3 30%, #4F8EF7 70%, #7C5CFC 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .gradient-accent {
+      background: linear-gradient(135deg, #4F8EF7, #7C5CFC);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Noise grain overlay */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 1000;
+      pointer-events: none;
+      opacity: 0.018;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    }
+
+    /* Animated gradient line */
+    .gradient-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #4F8EF7, #7C5CFC, transparent);
+      opacity: 0.4;
+    }
+
+    /* Code block */
+    .code-block {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      line-height: 1.7;
+      background: rgba(13, 17, 23, 0.95);
+      border: 1px solid #1C2333;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+    }
+    .code-line-num { color: #3D444D; user-select: none; margin-right: 1.5rem; }
+    .code-keyword { color: #FF7B72; }
+    .code-string { color: #A5D6FF; }
+    .code-func { color: #D2A8FF; }
+    .code-comment { color: #3D444D; }
+    .code-var { color: #79C0FF; }
+
+    /* Service card hover */
+    .service-card {
+      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+      border: 1px solid #1C2333;
+      cursor: default;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(79, 142, 247, 0.35);
+      box-shadow: 0 20px 60px rgba(79, 142, 247, 0.1), 0 0 0 1px rgba(79, 142, 247, 0.08);
+    }
+
+    /* Project card */
+    .project-card {
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: default;
+    }
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+    }
+    .project-card:hover .project-overlay {
+      opacity: 1;
+    }
+    .project-overlay {
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    /* Use case pill */
+    .use-pill {
+      transition: all 0.3s ease;
+      border: 1px solid #1C2333;
+    }
+    .use-pill:hover {
+      border-color: rgba(79, 142, 247, 0.4);
+      background: rgba(79, 142, 247, 0.06);
+    }
+
+    /* Blog card */
+    .blog-card {
+      transition: transform 0.35s ease, border-color 0.35s ease;
+      border: 1px solid #1C2333;
+    }
+    .blog-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(79, 142, 247, 0.3);
+    }
+
+    /* CTA button */
+    .btn-primary {
+      background: linear-gradient(135deg, #4F8EF7, #7C5CFC);
+      transition: opacity 0.25s, transform 0.25s, box-shadow 0.25s;
+      box-shadow: 0 4px 24px rgba(79, 142, 247, 0.35);
+    }
+    .btn-primary:hover {
+      opacity: 0.92;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 40px rgba(79, 142, 247, 0.5);
+    }
+    .btn-ghost {
+      border: 1px solid #1C2333;
+      transition: border-color 0.25s, background 0.25s, transform 0.25s;
+    }
+    .btn-ghost:hover {
+      border-color: rgba(79, 142, 247, 0.5);
+      background: rgba(79, 142, 247, 0.06);
+      transform: translateY(-2px);
+    }
+
+    /* Floating window UI mock */
+    .app-window {
+      background: rgba(13, 17, 23, 0.92);
+      border: 1px solid rgba(79, 142, 247, 0.2);
+      border-radius: 14px;
+      overflow: hidden;
+      backdrop-filter: blur(20px);
+    }
+    .window-bar {
+      background: rgba(28, 35, 51, 0.8);
+      padding: 8px 14px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .dot { width: 9px; height: 9px; border-radius: 50%; }
+
+    /* Counter animation */
+    @keyframes count-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .stat-num { animation: count-up 0.6s ease forwards; }
+
+    /* Scroll fade in */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Orbit dot */
+    @keyframes orbit {
+      from { transform: rotate(0deg) translateX(60px) rotate(0deg); }
+      to   { transform: rotate(360deg) translateX(60px) rotate(-360deg); }
+    }
+    .orbit-dot {
+      animation: orbit 8s linear infinite;
+      position: absolute;
+    }
+
+    /* Node pulse */
+    @keyframes node-pulse {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.4); }
+    }
+
+    /* Typewriter cursor */
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+    .cursor { display: inline-block; animation: blink 1s step-end infinite; }
+
+    /* Tech badge */
+    .tech-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      border: 1px solid #1C2333;
+      color: #8B949E;
+      background: rgba(13,17,23,0.8);
+    }
+
+    /* Tag */
+    .tag {
+      font-size: 0.68rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: rgba(79,142,247,0.1);
+      color: #4F8EF7;
+      border: 1px solid rgba(79,142,247,0.2);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Connecting line SVG */
+    .connector { stroke: rgba(79,142,247,0.2); stroke-width: 1; fill: none; stroke-dasharray: 4 4; }
+
+    /* Section label */
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      color: #4F8EF7;
+      text-transform: uppercase;
+    }
+
+    /* Mobile menu */
+    #mobile-menu {
+      display: none;
+      background: rgba(8,11,16,0.97);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid #1C2333;
+    }
+    #mobile-menu.open { display: block; }
+  </style>
+</head>
+<body class="bg-pa-bg text-pa-text">
+
+<!-- ═══════════════════════════════════════
+     NAVIGATION
+═══════════════════════════════════════ -->
+<nav id="nav-bar" class="px-6 py-5 lg:px-12">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <!-- Logo -->
+    <a href="#" class="flex items-center gap-3 group">
+      <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-pa-accent to-pa-accent2 flex items-center justify-center">
+        <span class="text-white font-mono font-bold text-sm">P</span>
+      </div>
+      <span class="font-semibold text-pa-text tracking-tight">Perfect Apps</span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#" class="text-sm text-pa-text font-medium hover:text-pa-accent transition-colors">Home</a>
+      <a href="work.html" class="text-sm text-pa-muted hover:text-pa-text transition-colors">Work</a>
+      <a href="use-cases.html" class="text-sm text-pa-muted hover:text-pa-text transition-colors">Use Cases</a>
+      <a href="about.html" class="text-sm text-pa-muted hover:text-pa-text transition-colors">About</a>
+      <a href="blog.html" class="text-sm text-pa-muted hover:text-pa-text transition-colors">Blog</a>
+      <a href="contact.html" class="text-sm text-pa-muted hover:text-pa-text transition-colors">Contact</a>
+    </div>
+
+    <!-- CTA + Hamburger -->
+    <div class="flex items-center gap-4">
+      <a href="contact.html" class="hidden md:inline-flex btn-primary text-white text-sm font-medium px-5 py-2.5 rounded-lg">
+        Start a Project
+      </a>
+      <button id="menu-toggle" class="md:hidden text-pa-muted hover:text-pa-text transition-colors">
+        <i class="fa-solid fa-bars text-lg"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-4">
+      <a href="#" class="text-sm text-pa-text py-2">Home</a>
+      <a href="work.html" class="text-sm text-pa-muted py-2">Work</a>
+      <a href="use-cases.html" class="text-sm text-pa-muted py-2">Use Cases</a>
+      <a href="about.html" class="text-sm text-pa-muted py-2">About</a>
+      <a href="blog.html" class="text-sm text-pa-muted py-2">Blog</a>
+      <a href="contact.html" class="text-sm text-pa-muted py-2">Contact</a>
+      <a href="contact.html" class="btn-primary text-white text-sm font-medium px-5 py-2.5 rounded-lg text-center mt-2">Start a Project</a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ═══════════════════════════════════════
+     HERO — 3D INTERACTIVE
+═══════════════════════════════════════ -->
+<section id="hero" class="relative h-[900px] flex items-center overflow-hidden">
+
+  <!-- Three.js canvas -->
+  <canvas id="hero-canvas"></canvas>
+
+  <!-- Radial glow -->
+  <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 55% at 65% 45%, rgba(79,142,247,0.07) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 80% 30%, rgba(124,92,252,0.06) 0%, transparent 60%); z-index:1;"></div>
+
+  <!-- Hero content -->
+  <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full grid lg:grid-cols-2 gap-16 items-center">
+
+    <!-- Left: Text -->
+    <div>
+      <div class="section-label mb-6 flex items-center gap-2">
+        <span class="w-6 h-px bg-pa-accent inline-block"></span>
+        perfectapps.in
+      </div>
+
+      <h1 class="text-4xl lg:text-6xl font-bold leading-tight tracking-tight mb-6">
+        We Build Software<br />
+        <span class="gradient-text">That Solves Real<br />Problems.</span>
+      </h1>
+
+      <p class="text-pa-muted text-base lg:text-lg leading-relaxed mb-10 max-w-lg">
+        Custom software, web apps and digital solutions engineered for real businesses. No templates. No shortcuts. Precise, scalable software built to last.
+      </p>
+
+      <div class="flex flex-wrap gap-4 mb-14">
+        <a href="contact.html" class="btn-primary inline-flex items-center gap-2 text-white text-sm font-semibold px-7 py-3.5 rounded-lg">
+          Start a Project
+          <i class="fa-solid fa-arrow-right text-xs"></i>
+        </a>
+        <a href="work.html" class="btn-ghost inline-flex items-center gap-2 text-pa-muted text-sm font-medium px-7 py-3.5 rounded-lg">
+          View Our Work
+        </a>
+      </div>
+
+      <!-- Stats row -->
+      <div class="flex gap-10">
+        <div>
+          <div class="text-2xl font-bold text-pa-text gradient-accent stat-num">50+</div>
+          <div class="text-xs text-pa-muted mt-1">Projects Delivered</div>
+        </div>
+        <div class="w-px bg-pa-border"></div>
+        <div>
+          <div class="text-2xl font-bold text-pa-text gradient-accent stat-num">8+</div>
+          <div class="text-xs text-pa-muted mt-1">Years Experience</div>
+        </div>
+        <div class="w-px bg-pa-border"></div>
+        <div>
+          <div class="text-2xl font-bold text-pa-text gradient-accent stat-num">100%</div>
+          <div class="text-xs text-pa-muted mt-1">Client Retention</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Floating UI Panels -->
+    <div class="hidden lg:flex relative h-[500px] items-center justify-center" id="hero-panels">
+
+      <!-- App Window 1 — Dashboard mock -->
+      <div class="app-window absolute top-0 left-4 w-72 shadow-2xl glow-blue" style="z-index:5;" id="panel-1">
+        <div class="window-bar">
+          <div class="dot" style="background:#FF5F56"></div>
+          <div class="dot" style="background:#FFBD2E"></div>
+          <div class="dot" style="background:#27C93F"></div>
+          <span class="ml-3 text-xs text-pa-muted font-mono">analytics_dashboard.tsx</span>
+        </div>
+        <div class="p-4">
+          <div class="text-xs text-pa-muted mb-3 font-mono">Revenue Overview</div>
+          <div class="flex gap-2 mb-3">
+            <div class="flex-1 bg-pa-border rounded h-16 flex items-end p-1 gap-1">
+              <div class="flex-1 rounded-sm" style="height:40%;background:rgba(79,142,247,0.4)"></div>
+              <div class="flex-1 rounded-sm" style="height:65%;background:rgba(79,142,247,0.5)"></div>
+              <div class="flex-1 rounded-sm" style="height:50%;background:rgba(79,142,247,0.4)"></div>
+              <div class="flex-1 rounded-sm" style="height:80%;background:rgba(79,142,247,0.7)"></div>
+              <div class="flex-1 rounded-sm" style="height:90%;background:#4F8EF7"></div>
+            </div>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-xs text-pa-muted font-mono">Total MRR</span>
+            <span class="text-sm font-bold text-pa-text">₹2.4L</span>
+          </div>
+          <div class="mt-2 h-1 bg-pa-border rounded-full overflow-hidden">
+            <div class="h-full rounded-full bg-gradient-to-r from-pa-accent to-pa-accent2" style="width:74%"></div>
+          </div>
+          <div class="flex gap-2 mt-3">
+            <span class="tag">+18.4%</span>
+            <span class="text-xs text-pa-muted font-mono self-center">vs last month</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Code Window -->
+      <div class="app-window absolute bottom-0 right-0 w-80 shadow-2xl glow-purple" style="z-index:4;" id="panel-2">
+        <div class="window-bar">
+          <div class="dot" style="background:#FF5F56"></div>
+          <div class="dot" style="background:#FFBD2E"></div>
+          <div class="dot" style="background:#27C93F"></div>
+          <span class="ml-3 text-xs text-pa-muted font-mono">api_handler.py</span>
+        </div>
+        <div class="code-block m-0 rounded-none border-0 border-t border-pa-border text-xs">
+          <div><span class="code-line-num">1</span><span class="code-keyword">async def</span> <span class="code-func">process_order</span>(order_id: <span class="code-var">str</span>):</div>
+          <div><span class="code-line-num">2</span>  <span class="code-comment"># Validate & enrich</span></div>
+          <div><span class="code-line-num">3</span>  order = <span class="code-keyword">await</span> <span class="code-func">db.get</span>(<span class="code-string">"orders"</span>, order_id)</div>
+          <div><span class="code-line-num">4</span>  result = <span class="code-keyword">await</span> <span class="code-func">ai_engine.classify</span>(order)</div>
+          <div><span class="code-line-num">5</span>  <span class="code-keyword">return</span> <span class="code-func">APIResponse</span>(result, <span class="code-var">200</span>)</div>
+          <div><span class="code-line-num">6</span><span class="cursor text-pa-accent">▌</span></div>
+        </div>
+      </div>
+
+      <!-- Status card -->
+      <div class="app-window absolute top-36 right-8 w-56" style="z-index:6;" id="panel-3">
+        <div class="p-4">
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-2 h-2 rounded-full bg-green-400" style="box-shadow:0 0 6px #4ade80"></div>
+            <span class="text-xs font-mono text-pa-muted">System Status</span>
+          </div>
+          <div class="space-y-2">
+            <div class="flex justify-between items-center">
+              <span class="text-xs text-pa-muted font-mono">API Latency</span>
+              <span class="text-xs text-green-400 font-mono">42ms</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-xs text-pa-muted font-mono">Uptime</span>
+              <span class="text-xs text-green-400 font-mono">99.97%</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-xs text-pa-muted font-mono">AI Model</span>
+              <span class="text-xs text-pa-accent font-mono">v2.1</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Node graph -->
+      <div class="absolute inset-0 pointer-events-none" style="z-index:3;">
+        <svg width="100%" height="100%" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid meet" opacity="0.35">
+          <circle cx="250" cy="250" r="4" fill="#4F8EF7"/>
+          <circle cx="120" cy="130" r="3" fill="#7C5CFC"/>
+          <circle cx="380" cy="150" r="3" fill="#4F8EF7"/>
+          <circle cx="100" cy="370" r="2.5" fill="#4F8EF7" opacity="0.6"/>
+          <circle cx="400" cy="380" r="2.5" fill="#7C5CFC" opacity="0.6"/>
+          <line x1="250" y1="250" x2="120" y2="130" class="connector"/>
+          <line x1="250" y1="250" x2="380" y2="150" class="connector"/>
+          <line x1="250" y1="250" x2="100" y2="370" class="connector"/>
+          <line x1="250" y1="250" x2="400" y2="380" class="connector"/>
+          <line x1="120" y1="130" x2="380" y2="150" class="connector"/>
+        </svg>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom gradient -->
+  <div class="absolute bottom-0 left-0 right-0 h-32 pointer-events-none" style="background: linear-gradient(to bottom, transparent, #080B10); z-index:8;"></div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     TRUSTED BY / TECH STACK
+═══════════════════════════════════════ -->
+<section class="py-12 border-t border-pa-border" id="tech-stack">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <div class="flex flex-wrap items-center gap-8 lg:gap-16 justify-center opacity-50">
+      <span class="tech-badge">React</span>
+      <span class="tech-badge">Next.js</span>
+      <span class="tech-badge">Python</span>
+      <span class="tech-badge">FastAPI</span>
+      <span class="tech-badge">PostgreSQL</span>
+      <span class="tech-badge">Node.js</span>
+      <span class="tech-badge">AWS</span>
+      <span class="tech-badge">OpenAI</span>
+      <span class="tech-badge">Docker</span>
+      <span class="tech-badge">Stripe</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SELECTED PROJECTS
+═══════════════════════════════════════ -->
+<section id="projects" class="py-24 lg:py-32">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 reveal">
+      <div>
+        <div class="section-label mb-4">Selected Projects</div>
+        <h2 class="text-3xl lg:text-4xl font-bold tracking-tight">Work that speaks<br /><span class="gradient-text">for itself.</span></h2>
+      </div>
+      <a href="work.html" class="btn-ghost inline-flex items-center gap-2 text-sm text-pa-muted px-6 py-3 rounded-lg w-fit">
+        View All Projects <i class="fa-solid fa-arrow-right text-xs"></i>
+      </a>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Project 1 -->
+      <div class="project-card glass rounded-2xl overflow-hidden reveal" style="transition-delay:0.1s">
+        <div class="relative h-52 overflow-hidden" style="background: linear-gradient(135deg, #0D1117, #1C2333);">
+          <!-- UI mock -->
+          <div class="absolute inset-4 app-window opacity-80">
+            <div class="window-bar" style="padding:6px 10px">
+              <div class="dot" style="background:#FF5F56;width:7px;height:7px"></div>
+              <div class="dot" style="background:#FFBD2E;width:7px;height:7px"></div>
+              <div class="dot" style="background:#27C93F;width:7px;height:7px"></div>
+            </div>
+            <div class="p-3">
+              <div class="flex gap-2 mb-2">
+                <div class="h-2 bg-pa-accent rounded-full" style="width:40%;opacity:0.5"></div>
+                <div class="h-2 bg-pa-border rounded-full" style="width:30%"></div>
+              </div>
+              <div class="grid grid-cols-3 gap-2">
+                <div class="h-10 bg-pa-border rounded-lg"></div>
+                <div class="h-10 rounded-lg" style="background:rgba(79,142,247,0.15)"></div>
+                <div class="h-10 bg-pa-border rounded-lg"></div>
+              </div>
+              <div class="mt-2 h-1.5 bg-pa-border rounded-full overflow-hidden">
+                <div class="h-full rounded-full bg-gradient-to-r from-pa-accent to-pa-accent2" style="width:60%"></div>
+              </div>
+            </div>
+          </div>
+          <div class="project-overlay absolute inset-0 bg-pa-accent/10 flex items-center justify-center">
+            <span class="btn-ghost text-xs px-4 py-2 rounded-lg text-pa-text">View Project</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <div class="flex gap-2 mb-3">
+            <span class="tag">SaaS</span>
+            <span class="tag">React</span>
+          </div>
+          <h3 class="font-semibold text-pa-text mb-2">Fleet Management Platform</h3>
+          <p class="text-sm text-pa-muted leading-relaxed">Real-time vehicle tracking, route optimization, and driver analytics for a logistics company managing 400+ vehicles.</p>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-card glass rounded-2xl overflow-hidden reveal" style="transition-delay:0.2s">
+        <div class="relative h-52 overflow-hidden" style="background: linear-gradient(135deg, #0D1117, #1A1026);">
+          <div class="absolute inset-4 app-window opacity-80">
+            <div class="window-bar" style="padding:6px 10px">
+              <div class="dot" style="background:#FF5F56;width:7px;height:7px"></div>
+              <div class="dot" style="background:#FFBD2E;width:7px;height:7px"></div>
+              <div class="dot" style="background:#27C93F;width:7px;height:7px"></div>
+            </div>
+            <div class="p-3">
+              <div class="code-block p-2 text-xs m-0 rounded border-0" style="background:rgba(13,17,23,0.5)">
+                <div><span class="code-keyword">const</span> <span class="code-var">insight</span> = <span class="code-keyword">await</span> ai.<span class="code-func">analyze</span>(data)</div>
+                <div class="mt-1"><span class="code-string">→ Anomaly detected at row 47</span></div>
+              </div>
+              <div class="mt-2 flex gap-2">
+                <div class="h-6 flex-1 rounded bg-pa-border"></div>
+                <div class="h-6 w-16 rounded" style="background:rgba(124,92,252,0.3)"></div>
+              </div>
+            </div>
+          </div>
+          <div class="project-overlay absolute inset-0 bg-pa-accent2/10 flex items-center justify-center">
+            <span class="btn-ghost text-xs px-4 py-2 rounded-lg text-pa-text">View Project</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <div class="flex gap-2 mb-3">
+            <span class="tag">AI/ML</span>
+            <span class="tag">Python</span>
+          </div>
+          <h3 class="font-semibold text-pa-text mb-2">AI-Powered Audit Tool</h3>
+          <p class="text-sm text-pa-muted leading-relaxed">Automated financial statement analysis with anomaly detection and AI-generated audit recommendations for CA firms.</p>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project-card glass rounded-2xl overflow-hidden md:col-span-2 lg:col-span-1 reveal" style="transition-delay:0.3s">
+        <div class="relative h-52 overflow-hidden" style="background: linear-gradient(135deg, #080B10, #0D1A17);">
+          <div class="absolute inset-4 app-window opacity-80">
+            <div class="window-bar" style="padding:6px 10px">
+              <div class="dot" style="background:#FF5F56;width:7px;height:7px"></div>
+              <div class="dot" style="background:#FFBD2E;width:7px;height:7px"></div>
+              <div class="dot" style="background:#27C93F;width:7px;height:7px"></div>
+            </div>
+            <div class="p-3">
+              <div class="flex items-center gap-2 mb-2">
+                <div class="w-2 h-2 rounded-full bg-green-400"></div>
+                <span class="text-xs font-mono text-pa-muted">API /v2/orders — 200 OK</span>
+              </div>
+              <div class="h-1.5 bg-pa-border rounded-full overflow-hidden mb-3">
+                <div class="h-full rounded-full bg-green-500/60" style="width:92%"></div>
+              </div>
+              <div class="flex gap-2">
+                <div class="text-xs font-mono text-pa-muted">Req/s</div>
+                <div class="text-xs font-mono text-green-400">2,847</div>
+              </div>
+            </div>
+          </div>
+          <div class="project-overlay absolute inset-0 bg-green-500/5 flex items-center justify-center">
+            <span class="btn-ghost text-xs px-4 py-2 rounded-lg text-pa-text">View Project</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <div class="flex gap-2 mb-3">
+            <span class="tag">API</span>
+            <span class="tag">FastAPI</span>
+          </div>
+          <h3 class="font-semibold text-pa-text mb-2">E-Commerce API Gateway</h3>
+          <p class="text-sm text-pa-muted leading-relaxed">High-throughput REST API handling 3M+ daily requests for a D2C brand — inventory, orders, payments, and logistics unified.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     WHAT WE BUILD
+═══════════════════════════════════════ -->
+<section id="services" class="py-24 lg:py-32 border-t border-pa-border">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+
+    <div class="text-center mb-16 reveal">
+      <div class="section-label mb-4 justify-center flex">What We Build</div>
+      <h2 class="text-3xl lg:text-4xl font-bold tracking-tight mb-4">
+        Software for every layer<br /><span class="gradient-text">of your business.</span>
+      </h2>
+      <p class="text-pa-muted max-w-xl mx-auto">From customer-facing interfaces to backend infrastructure — we architect and build end-to-end.</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <div class="service-card glass rounded-2xl p-7 reveal" style="transition-delay:0.05s">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-pa-accent/20 to-pa-accent/5 flex items-center justify-center mb-5 border border-pa-accent/20">
+          <i class="fa-solid fa-layer-group text-pa-accent text-base"></i>
+        </div>
+        <h3 class="font-semibold text-pa-text mb-3">Custom Web Applications</h3>
+        <p class="text-sm text-pa-muted leading-relaxed mb-4">End-to-end web apps tailored to your exact workflow — no off-the-shelf compromises. Built to scale from day one.</p>
+        <div class="flex gap-2 flex-wrap">
+          <span class="tech-badge">React</span>
+          <span class="tech-badge">Next.js</span>
+          <span class="tech-badge">Node</span>
+        </div>
+      </div>
+
+      <div class="service-card glass rounded-2xl p-7 reveal" style="transition-delay:0.1s">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-pa-accent2/20 to-pa-accent2/5 flex items-center justify-center mb-5 border border-pa-accent2/20">
+          <i class="fa-solid fa-bolt text-pa-accent2 text-base"></i>
+        </div>
+        <h3 class="font-semibold text-pa-text mb-3">SaaS Products</h3>
+        <p class="text-sm text-pa-muted leading-relaxed mb-4">We help you launch subscription software with multi-tenancy, billing, auth, and admin — architecture that pays off.</p>
+        <div class="flex gap-2 flex-wrap">
+          <span class="tech-badge">Stripe</span>
+          <span class="tech-badge">Postgres</span>
+          <span class="tech-badge">AWS</span>
+        </div>
+      </div>
+
+      <div class="service-card glass rounded-2xl p-7 reveal" style="transition-delay:0.15s">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-400/20 to-blue-400/5 flex items-center justify-center mb-5 border border-blue-400/20">
+          <i class="fa-solid fa-plug text-blue-400 text-base"></i>
+        </div>
+        <h3 class="font-semibold text-pa-text mb-3">APIs & Integrations</h3>
+        <p class="text-sm text-pa-muted leading-relaxed mb-4">Fast, documented, secure REST and GraphQL APIs. Connect your systems, payment gateways, ERPs, and third-party tools.</p>
+        <div class="flex gap-2 flex-wrap">
+          <span class="tech-badge">FastAPI</span>
+          <span class="tech-badge">GraphQL</span>
+          <span class="tech-badge">Webhooks</span>
+        </div>
+      </div>
+
+      <div class="service-card glass rounded-2xl p-7 reveal" style="transition-delay:0.2s">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-purple-400/20 to-purple-400/5 flex items-center justify-center mb-5 border border-purple-400/20">
+          <i class="fa-solid fa-brain text-purple-400 text-base"></i>
+        </div>
+        <h3 class="font-semibold text-pa-text mb-3">AI-Powered Solutions</h3>
+        <p class="text-sm text-pa-muted leading-relaxed mb-4">Production-grade AI integrations — document parsing, chatbots, classification, prediction engines built into your product.</p>
+        <div class="flex gap-2 flex-wrap">
+          <span class="tech-badge">OpenAI</span>
+          <span class="tech-badge">LangChain</span>
+          <span class="tech-badge">Python</span>
+        </div>
+      </div>
+
+      <div class="service-card glass rounded-2xl p-7 reveal" style="transition-delay:0.25s">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-400/20 to-emerald-400/5 flex items-center justify-center mb-5 border border-emerald-400/20">
+          <i class="fa-solid fa-database text-emerald-400 text-base"></i>
+        </div>
+        <h3 class="font-semibold text-pa-text mb-3">Data Pipelines & Dashboards</h3>
+        <p class="text-sm text-pa-muted leading-relaxed mb-4">Automated ETL, reporting dashboards, and business intelligence tools that turn raw data into clear decisions.</p>
+        <div class="flex gap-2 flex-wrap">
+          <span class="tech-badge">PostgreSQL</span>
+          <span class="tech-badge">Redis</span>
+          <span class="tech-badge">Airflow</span>
+        </div>
+      </div>
+
+      <div class="service-card glass rounded-2xl p-7 reveal" style="transition-delay:0.3s">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-orange-400/20 to-orange-400/5 flex items-center justify-center mb-5 border border-orange-400/20">
+          <i class="fa-solid fa-server text-orange-400 text-base"></i>
+        </div>
+        <h3 class="font-semibold text-pa-text mb-3">DevOps & Infrastructure</h3>
+        <p class="text-sm text-pa-muted leading-relaxed mb-4">CI/CD pipelines, containerized deployments, auto-scaling infrastructure. We ship reliably and maintain carefully.</p>
+        <div class="flex gap-2 flex-wrap">
+          <span class="tech-badge">Docker</span>
+          <span class="tech-badge">GitHub Actions</span>
+          <span class="tech-badge">AWS</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     USE CASES
+═══════════════════════════════════════ -->
+<section id="use-cases" class="py-24 lg:py-32">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+      <div class="reveal">
+        <div class="section-label mb-4">Use Cases</div>
+        <h2 class="text-3xl lg:text-4xl font-bold tracking-tight mb-6">
+          Built for industries<br /><span class="gradient-text">that need precision.</span>
+        </h2>
+        <p class="text-pa-muted leading-relaxed mb-8">We don't generalize. Every solution is shaped around your industry's real workflows, compliance needs, and operational realities.</p>
+        <a href="use-cases.html" class="btn-ghost inline-flex items-center gap-2 text-sm text-pa-muted px-6 py-3 rounded-lg">
+          Explore All Use Cases <i class="fa-solid fa-arrow-right text-xs"></i>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3 reveal" style="transition-delay:0.2s">
+        <div class="use-pill glass rounded-xl p-5">
+          <i class="fa-solid fa-truck-fast text-pa-accent mb-3 text-base"></i>
+          <div class="text-sm font-medium text-pa-text mb-1">Logistics</div>
+          <div class="text-xs text-pa-muted">Fleet tracking, route planning, delivery management</div>
+        </div>
+        <div class="use-pill glass rounded-xl p-5">
+          <i class="fa-solid fa-landmark text-pa-accent2 mb-3 text-base"></i>
+          <div class="text-sm font-medium text-pa-text mb-1">Finance & CA</div>
+          <div class="text-xs text-pa-muted">Audit tools, compliance, reporting automation</div>
+        </div>
+        <div class="use-pill glass rounded-xl p-5">
+          <i class="fa-solid fa-cart-shopping text-blue-400 mb-3 text-base"></i>
+          <div class="text-sm font-medium text-pa-text mb-1">E-Commerce</div>
+          <div class="text-xs text-pa-muted">Custom storefronts, inventory, order management</div>
+        </div>
+        <div class="use-pill glass rounded-xl p-5">
+          <i class="fa-solid fa-hospital text-emerald-400 mb-3 text-base"></i>
+          <div class="text-sm font-medium text-pa-text mb-1">Healthcare</div>
+          <div class="text-xs text-pa-muted">Patient portals, appointment systems, HIPAA-safe</div>
+        </div>
+        <div class="use-pill glass rounded-xl p-5">
+          <i class="fa-solid fa-graduation-cap text-purple-400 mb-3 text-base"></i>
+          <div class="text-sm font-medium text-pa-text mb-1">EdTech</div>
+          <div class="text-xs text-pa-muted">LMS platforms, assessments, progress tracking</div>
+        </div>
+        <div class="use-pill glass rounded-xl p-5">
+          <i class="fa-solid fa-building text-orange-400 mb-3 text-base"></i>
+          <div class="text-sm font-medium text-pa-text mb-1">Real Estate</div>
+          <div class="text-xs text-pa-muted">Property management, CRM, listing platforms</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     ABOUT PERFECT APPS
+═══════════════════════════════════════ -->
+<section id="about" class="py-24 lg:py-32 border-t border-pa-border">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+      <!-- Visual -->
+      <div class="relative reveal">
+        <div class="glass-strong rounded-2xl p-8 glow-blue">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-pa-accent to-pa-accent2 flex items-center justify-center">
+              <span class="text-white font-mono font-bold text-sm">P</span>
+            </div>
+            <div>
+              <div class="text-sm font-semibold text-pa-text">Perfect Apps</div>
+              <div class="text-xs text-pa-muted font-mono">perfectapps.in</div>
+            </div>
+          </div>
+
+          <div class="space-y-5 mb-6">
+            <div class="flex gap-3 items-start">
+              <div class="w-8 h-8 rounded-lg bg-pa-border flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i class="fa-solid fa-code text-pa-accent text-xs"></i>
+              </div>
+              <div>
+                <div class="text-sm font-medium text-pa-text mb-1">Technical Depth</div>
+                <div class="text-xs text-pa-muted leading-relaxed">We're engineers first. Every line of code is considered for performance, security, and long-term maintainability.</div>
+              </div>
+            </div>
+            <div class="flex gap-3 items-start">
+              <div class="w-8 h-8 rounded-lg bg-pa-border flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i class="fa-solid fa-handshake text-pa-accent2 text-xs"></i>
+              </div>
+              <div>
+                <div class="text-sm font-medium text-pa-text mb-1">Direct Partnership</div>
+                <div class="text-xs text-pa-muted leading-relaxed">No account managers or outsourced teams. You work directly with the engineers who build your product.</div>
+              </div>
+            </div>
+            <div class="flex gap-3 items-start">
+              <div class="w-8 h-8 rounded-lg bg-pa-border flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i class="fa-solid fa-shield-halved text-blue-400 text-xs"></i>
+              </div>
+              <div>
+                <div class="text-sm font-medium text-pa-text mb-1">Reliable Delivery</div>
+                <div class="text-xs text-pa-muted leading-relaxed">Consistent timelines, honest communication, and post-launch support as standard — not optional.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="gradient-line"></div>
+          <div class="flex gap-6 pt-5">
+            <div>
+              <div class="text-xl font-bold gradient-accent">Pune, IN</div>
+              <div class="text-xs text-pa-muted mt-0.5">Based in India</div>
+            </div>
+            <div class="w-px bg-pa-border"></div>
+            <div>
+              <div class="text-xl font-bold gradient-accent">Global</div>
+              <div class="text-xs text-pa-muted mt-0.5">Clients Served</div>
+            </div>
+            <div class="w-px bg-pa-border"></div>
+            <div>
+              <div class="text-xl font-bold gradient-accent">2016</div>
+              <div class="text-xs text-pa-muted mt-0.5">Founded</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating accent -->
+        <div class="absolute -top-4 -right-4 w-20 h-20 rounded-2xl border border-pa-accent/20 bg-pa-accent/5 flex items-center justify-center" style="z-index:-1">
+          <i class="fa-solid fa-atom text-pa-accent/30 text-2xl"></i>
+        </div>
+      </div>
+
+      <!-- Text -->
+      <div class="reveal" style="transition-delay:0.2s">
+        <div class="section-label mb-4">About Perfect Apps</div>
+        <h2 class="text-3xl lg:text-4xl font-bold tracking-tight mb-6">
+          A small studio.<br /><span class="gradient-text">Serious software.</span>
+        </h2>
+        <p class="text-pa-muted leading-relaxed mb-5">
+          Perfect Apps is a boutique software engineering studio based in Pune, India. We're a tight team of engineers who care about craft — we don't take on more projects than we can do exceptionally well.
+        </p>
+        <p class="text-pa-muted leading-relaxed mb-8">
+          We work best with businesses that want a long-term technical partner, not just a vendor. Our clients treat us as their engineering team — and we take that seriously.
+        </p>
+        <a href="about.html" class="btn-ghost inline-flex items-center gap-2 text-sm text-pa-muted px-6 py-3 rounded-lg">
+          Learn More About Us <i class="fa-solid fa-arrow-right text-xs"></i>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     LATEST BLOG POSTS
+═══════════════════════════════════════ -->
+<section id="blog" class="py-24 lg:py-32">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14 reveal">
+      <div>
+        <div class="section-label mb-4">Latest Blog Posts</div>
+        <h2 class="text-3xl lg:text-4xl font-bold tracking-tight">Thinking out loud<br /><span class="gradient-text">on software.</span></h2>
+      </div>
+      <a href="blog.html" class="btn-ghost inline-flex items-center gap-2 text-sm text-pa-muted px-6 py-3 rounded-lg w-fit">
+        Read All Posts <i class="fa-solid fa-arrow-right text-xs"></i>
+      </a>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <article class="blog-card glass rounded-2xl p-7 reveal" style="transition-delay:0.1s">
+        <div class="flex items-center gap-2 mb-5">
+          <span class="tag">Architecture</span>
+          <span class="text-xs text-pa-muted font-mono ml-auto">Jun 12, 2025</span>
+        </div>
+        <h3 class="font-semibold text-pa-text text-base mb-3 leading-snug">When to build a SaaS product vs. a custom internal tool</h3>
+        <p class="text-sm text-pa-muted leading-relaxed mb-5">The decision framework we walk every client through before writing a single line of code.</p>
+        <a href="blog.html" class="inline-flex items-center gap-1.5 text-xs text-pa-accent font-medium hover:gap-2.5 transition-all">
+          Read More <i class="fa-solid fa-arrow-right text-xs"></i>
+        </a>
+      </article>
+
+      <article class="blog-card glass rounded-2xl p-7 reveal" style="transition-delay:0.2s">
+        <div class="flex items-center gap-2 mb-5">
+          <span class="tag">AI/ML</span>
+          <span class="text-xs text-pa-muted font-mono ml-auto">May 28, 2025</span>
+        </div>
+        <h3 class="font-semibold text-pa-text text-base mb-3 leading-snug">Integrating LLMs into production apps — 5 lessons we learned</h3>
+        <p class="text-sm text-pa-muted leading-relaxed mb-5">Practical, hard-won lessons from shipping AI features that actually work in production environments.</p>
+        <a href="blog.html" class="inline-flex items-center gap-1.5 text-xs text-pa-accent font-medium hover:gap-2.5 transition-all">
+          Read More <i class="fa-solid fa-arrow-right text-xs"></i>
+        </a>
+      </article>
+
+      <article class="blog-card glass rounded-2xl p-7 reveal" style="transition-delay:0.3s">
+        <div class="flex items-center gap-2 mb-5">
+          <span class="tag">API Design</span>
+          <span class="text-xs text-pa-muted font-mono ml-auto">May 10, 2025</span>
+        </div>
+        <h3 class="font-semibold text-pa-text text-base mb-3 leading-snug">Designing APIs that scale: versioning, pagination, and error handling</h3>
+        <p class="text-sm text-pa-muted leading-relaxed mb-5">How we structure REST APIs at Perfect Apps to be pleasant to consume and painless to evolve.</p>
+        <a href="blog.html" class="inline-flex items-center gap-1.5 text-xs text-pa-accent font-medium hover:gap-2.5 transition-all">
+          Read More <i class="fa-solid fa-arrow-right text-xs"></i>
+        </a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     CONTACT CTA
+═══════════════════════════════════════ -->
+<section id="contact-cta" class="py-24 lg:py-32 border-t border-pa-border">
+  <div class="max-w-4xl mx-auto px-6 lg:px-12 text-center reveal">
+
+    <div class="glass-strong rounded-3xl p-12 lg:p-16 glow-blue relative overflow-hidden">
+      <!-- Background glow -->
+      <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(79,142,247,0.08) 0%, transparent 60%), radial-gradient(ellipse 50% 50% at 80% 100%, rgba(124,92,252,0.06) 0%, transparent 60%);"></div>
+
+      <div class="relative z-10">
+        <div class="section-label mb-5 justify-center flex">Start a Project</div>
+        <h2 class="text-3xl lg:text-5xl font-bold tracking-tight mb-5">
+          Have a problem worth<br /><span class="gradient-text">solving?</span>
+        </h2>
+        <p class="text-pa-muted text-base lg:text-lg leading-relaxed mb-10 max-w-xl mx-auto">
+          Tell us what you're building. We'll reply within 24 hours with honest thoughts on scope, timeline, and approach.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+          <a href="contact.html" class="btn-primary inline-flex items-center justify-center gap-2 text-white text-sm font-semibold px-8 py-4 rounded-xl">
+            Start a Project <i class="fa-solid fa-arrow-right text-xs"></i>
+          </a>
+          <a href="mailto:hello@perfectapps.in" class="btn-ghost inline-flex items-center justify-center gap-2 text-pa-muted text-sm font-medium px-8 py-4 rounded-xl">
+            <i class="fa-solid fa-envelope text-xs"></i>
+            hello@perfectapps.in
+          </a>
+        </div>
+
+        <div class="flex flex-wrap gap-6 justify-center">
+          <div class="flex items-center gap-2 text-xs text-pa-muted">
+            <i class="fa-solid fa-check text-green-400 text-xs"></i>
+            Free consultation
+          </div>
+          <div class="flex items-center gap-2 text-xs text-pa-muted">
+            <i class="fa-solid fa-check text-green-400 text-xs"></i>
+            NDA on request
+          </div>
+          <div class="flex items-center gap-2 text-xs text-pa-muted">
+            <i class="fa-solid fa-check text-green-400 text-xs"></i>
+            24h response
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════ -->
+<footer id="footer" class="border-t border-pa-border py-12">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <div class="grid md:grid-cols-4 gap-10 mb-10">
+
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-pa-accent to-pa-accent2 flex items-center justify-center">
+            <span class="text-white font-mono font-bold text-sm">P</span>
+          </div>
+          <span class="font-semibold text-pa-text">Perfect Apps</span>
+        </div>
+        <p class="text-sm text-pa-muted leading-relaxed max-w-xs mb-5">
+          A small, highly technical software studio building custom web apps, SaaS products, APIs, and AI-powered solutions for real businesses.
+        </p>
+        <div class="flex gap-3">
+          <a href="#" class="w-9 h-9 rounded-lg border border-pa-border flex items-center justify-center text-pa-muted hover:text-pa-accent hover:border-pa-accent/30 transition-all text-sm">
+            <i class="fa-brands fa-x-twitter"></i>
+          </a>
+          <a href="#" class="w-9 h-9 rounded-lg border border-pa-border flex items-center justify-center text-pa-muted hover:text-pa-accent hover:border-pa-accent/30 transition-all text-sm">
+            <i class="fa-brands fa-linkedin-in"></i>
+          </a>
+          <a href="#" class="w-9 h-9 rounded-lg border border-pa-border flex items-center justify-center text-pa-muted hover:text-pa-accent hover:border-pa-accent/30 transition-all text-sm">
+            <i class="fa-brands fa-github"></i>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <div class="text-xs font-semibold text-pa-text mb-4 tracking-wider uppercase">Navigation</div>
+        <ul class="space-y-2.5">
+          <li><a href="#" class="text-sm text-pa-muted hover:text-pa-text transition-colors">Home</a></li>
+          <li><a href="work.html" class="text-sm text-pa-muted hover:text-pa-text transition-colors">Work</a></li>
+          <li><a href="use-cases.html" class="text-sm text-pa-muted hover:text-pa-text transition-colors">Use Cases</a></li>
+          <li><a href="about.html" class="text-sm text-pa-muted hover:text-pa-text transition-colors">About</a></li>
+          <li><a href="blog.html" class="text-sm text-pa-muted hover:text-pa-text transition-colors">Blog</a></li>
+          <li><a href="contact.html" class="text-sm text-pa-muted hover:text-pa-text transition-colors">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="text-xs font-semibold text-pa-text mb-4 tracking-wider uppercase">Contact</div>
+        <ul class="space-y-2.5">
+          <li class="text-sm text-pa-muted">hello@perfectapps.in</li>
+          <li class="text-sm text-pa-muted">Pune, Maharashtra, India</li>
+          <li class="text-sm text-pa-muted font-mono">perfectapps.in</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="gradient-line mb-6"></div>
+
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+      <span class="text-xs text-pa-muted font-mono">© 2025 Perfect Apps · All rights reserved</span>
+      <div class="flex gap-5">
+        <a href="#" class="text-xs text-pa-muted hover:text-pa-text transition-colors">Privacy Policy</a>
+        <a href="#" class="text-xs text-pa-muted hover:text-pa-text transition-colors">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════ -->
+<script>
+  // ── Nav scroll ──
+  const navBar = document.getElementById('nav-bar');
+  window.addEventListener('scroll', () => {
+    navBar.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // ── Mobile menu ──
+  document.getElementById('menu-toggle').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  });
+
+  // ── Scroll reveal ──
+  const reveals = document.querySelectorAll('.reveal');
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(r => revealObs.observe(r));
+
+  // ── Panel parallax on mouse ──
+  const panels = document.getElementById('hero-panels');
+  if (panels) {
+    document.addEventListener('mousemove', (e) => {
+      const cx = window.innerWidth / 2;
+      const cy = window.innerHeight / 2;
+      const dx = (e.clientX - cx) / cx;
+      const dy = (e.clientY - cy) / cy;
+
+      const p1 = document.getElementById('panel-1');
+      const p2 = document.getElementById('panel-2');
+      const p3 = document.getElementById('panel-3');
+      if (p1) p1.style.transform = `translate(${dx * -10}px, ${dy * -6}px)`;
+      if (p2) p2.style.transform = `translate(${dx * 12}px, ${dy * 8}px)`;
+      if (p3) p3.style.transform = `translate(${dx * 6}px, ${dy * -10}px)`;
+    });
+  }
+
+  // ── THREE.JS HERO SCENE ──
+  window.addEventListener('load', () => {
+    try {
+      const canvas = document.getElementById('hero-canvas');
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(canvas.parentElement.clientWidth, canvas.parentElement.clientHeight);
+      renderer.setClearColor(0x000000, 0);
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(60, canvas.parentElement.clientWidth / canvas.parentElement.clientHeight, 0.1, 1000);
+      camera.position.set(0, 0, 28);
+
+      // Lighting
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.15);
+      scene.add(ambientLight);
+      const blueLight = new THREE.PointLight(0x4F8EF7, 2.5, 80);
+      blueLight.position.set(15, 10, 20);
+      scene.add(blueLight);
+      const purpleLight = new THREE.PointLight(0x7C5CFC, 1.8, 80);
+      purpleLight.position.set(-15, -8, 15);
+      scene.add(purpleLight);
+
+      // ── Particle field ──
+      const particleCount = 320;
+      const positions = new Float32Array(particleCount * 3);
+      const colors = new Float32Array(particleCount * 3);
+      for (let i = 0; i < particleCount; i++) {
+        positions[i * 3]     = (Math.random() - 0.5) * 80;
+        positions[i * 3 + 1] = (Math.random() - 0.5) * 60;
+        positions[i * 3 + 2] = (Math.random() - 0.5) * 40 - 5;
+        const t = Math.random();
+        if (t < 0.5) {
+          colors[i * 3] = 0.31; colors[i * 3 + 1] = 0.56; colors[i * 3 + 2] = 0.97;
+        } else {
+          colors[i * 3] = 0.49; colors[i * 3 + 1] = 0.36; colors[i * 3 + 2] = 0.99;
+        }
+      }
+      const partGeo = new THREE.BufferGeometry();
+      partGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      partGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+      const partMat = new THREE.PointsMaterial({ size: 0.18, vertexColors: true, transparent: true, opacity: 0.55, sizeAttenuation: true });
+      const particles = new THREE.Points(partGeo, partMat);
+      scene.add(particles);
+
+      // ── Geometric objects ──
+      // Icosahedron — main centerpiece
+      const icoGeo = new THREE.IcosahedronGeometry(5, 1);
+      const icoMat = new THREE.MeshStandardMaterial({
+        color: 0x1a2540,
+        metalness: 0.8,
+        roughness: 0.3,
+        emissive: 0x0D2070,
+        emissiveIntensity: 0.2,
+        wireframe: false,
+        transparent: true,
+        opacity: 0.7,
+      });
+      const ico = new THREE.Mesh(icoGeo, icoMat);
+      ico.position.set(14, 2, -5);
+      scene.add(ico);
+
+      // Wireframe overlay on ico
+      const icoWireGeo = new THREE.IcosahedronGeometry(5.05, 1);
+      const icoWireMat = new THREE.MeshBasicMaterial({ color: 0x4F8EF7, wireframe: true, transparent: true, opacity: 0.25 });
+      const icoWire = new THREE.Mesh(icoWireGeo, icoWireMat);
+      icoWire.position.copy(ico.position);
+      scene.add(icoWire);
+
+      // Torus
+      const torusGeo = new THREE.TorusGeometry(3.5, 0.6, 16, 60);
+      const torusMat = new THREE.MeshStandardMaterial({
+        color: 0x0d1030,
+        metalness: 0.9,
+        roughness: 0.2,
+        emissive: 0x2a0d70,
+        emissiveIntensity: 0.3,
+        transparent: true,
+        opacity: 0.8,
+      });
+      const torus = new THREE.Mesh(torusGeo, torusMat);
+      torus.position.set(-16, -4, -8);
+      torus.rotation.x = 0.5;
+      scene.add(torus);
+
+      // Torus wireframe ring
+      const torusWireGeo = new THREE.TorusGeometry(3.52, 0.62, 8, 60);
+      const torusWireMat = new THREE.MeshBasicMaterial({ color: 0x7C5CFC, wireframe: true, transparent: true, opacity: 0.3 });
+      const torusWire = new THREE.Mesh(torusWireGeo, torusWireMat);
+      torusWire.position.copy(torus.position);
+      torusWire.rotation.copy(torus.rotation);
+      scene.add(torusWire);
+
+      // Octahedron
+      const octaGeo = new THREE.OctahedronGeometry(2.5, 0);
+      const octaMat = new THREE.MeshStandardMaterial({ color: 0x0d1825, metalness: 0.7, roughness: 0.4, emissive: 0x0a1f50, emissiveIntensity: 0.4, transparent: true, opacity: 0.75 });
+      const octa = new THREE.Mesh(octaGeo, octaMat);
+      octa.position.set(5, -10, -3);
+      scene.add(octa);
+
+      // Octahedron wire
+      const octaWireGeo = new THREE.OctahedronGeometry(2.55, 0);
+      const octaWireMat = new THREE.MeshBasicMaterial({ color: 0x4F8EF7, wireframe: true, transparent: true, opacity: 0.35 });
+      const octaWire = new THREE.Mesh(octaWireGeo, octaWireMat);
+      octaWire.position.copy(octa.position);
+      scene.add(octaWire);
+
+      // ── Node connection lines ──
+      const nodePositions = [
+        new THREE.Vector3(14, 2, -5),    // ico
+        new THREE.Vector3(-16, -4, -8),  // torus
+        new THREE.Vector3(5, -10, -3),   // octa
+        new THREE.Vector3(-6, 8, -10),
+        new THREE.Vector3(20, -8, -12),
+      ];
+
+      const linePairs = [[0,1],[0,2],[1,2],[2,3],[0,3],[0,4]];
+      linePairs.forEach(([a, b]) => {
+        const lineGeo = new THREE.BufferGeometry().setFromPoints([nodePositions[a], nodePositions[b]]);
+        const lineMat = new THREE.LineBasicMaterial({ color: 0x4F8EF7, transparent: true, opacity: 0.12 });
+        scene.add(new THREE.Line(lineGeo, lineMat));
+      });
+
+      // Small node dots
+      nodePositions.slice(3).forEach(pos => {
+        const dotGeo = new THREE.SphereGeometry(0.3, 8, 8);
+        const dotMat = new THREE.MeshBasicMaterial({ color: 0x7C5CFC, transparent: true, opacity: 0.7 });
+        const dot = new THREE.Mesh(dotGeo, dotMat);
+        dot.position.copy(pos);
+        scene.add(dot);
+      });
+
+      // ── Mouse tracking ──
+      let mouseX = 0, mouseY = 0;
+      let targetX = 0, targetY = 0;
+      document.addEventListener('mousemove', (e) => {
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+        mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+      });
+
+      // ── Scroll tracking ──
+      let scrollY = 0;
+      window.addEventListener('scroll', () => { scrollY = window.scrollY; });
+
+      // ── Resize ──
+      window.addEventListener('resize', () => {
+        const w = canvas.parentElement.clientWidth;
+        const h = canvas.parentElement.clientHeight;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+      });
+
+      // ── Animation loop ──
+      const clock = new THREE.Clock();
+      function animate() {
+        requestAnimationFrame(animate);
+        const t = clock.getElapsedTime();
+
+        // Ease mouse
+        targetX += (mouseX - targetX) * 0.04;
+        targetY += (mouseY - targetY) * 0.04;
+
+        // Camera gentle drift
+        camera.position.x += (targetX * 3 - camera.position.x) * 0.02;
+        camera.position.y += (-targetY * 2 - camera.position.y) * 0.02;
+        camera.lookAt(0, 0, 0);
+
+        // Rotate geometries
+        ico.rotation.y = t * 0.18 + targetX * 0.3;
+        ico.rotation.x = t * 0.10 + targetY * 0.2;
+        icoWire.rotation.copy(ico.rotation);
+
+        torus.rotation.z = t * 0.12;
+        torus.rotation.y = targetX * 0.25;
+        torusWire.rotation.copy(torus.rotation);
+
+        octa.rotation.x = t * 0.22 + targetY * 0.3;
+        octa.rotation.z = t * 0.15;
+        octaWire.rotation.copy(octa.rotation);
+
+        // Particles slow rotation
+        particles.rotation.y = t * 0.015;
+        particles.rotation.x = t * 0.008;
+
+        // Scroll: push scene back
+        const scrollOffset = scrollY * 0.018;
+        scene.position.y = -scrollOffset;
+        scene.position.z = -scrollOffset * 0.3;
+
+        renderer.render(scene, camera);
+      }
+      animate();
+
+    } catch(e) {
+      console.warn('Three.js scene init failed:', e);
+    }
+  });
+</script>
+
+</body>
+</html>
