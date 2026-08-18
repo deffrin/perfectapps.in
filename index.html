@@ -1,18 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script>
-        window.FontAwesomeConfig = {
-          autoReplaceSvg: 'nest'
-        };
-      </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Home</title>
+  <title>Perfect Apps — We Make Websites, Online Stores, Web & Mobile Apps | Thrissur, India</title>
+  <meta name="description" content="Perfect Apps is a  software studio building custom web apps, SaaS products, APIs, and AI-powered solutions for real businesses. Based in Thrissur, India." />
+  <meta name="keywords" content="custom software development, web applications, SaaS, API development, AI solutions, software studio, Thrissur, India" />
+  <meta name="author" content="Perfect Apps" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://perfectapps.in/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://perfectapps.in/" />
+  <meta property="og:title" content="Perfect Apps — Custom Software Studio | Thrissur, India" />
+  <meta property="og:description" content="Custom web apps, SaaS products, APIs, and AI-powered solutions engineered for real businesses. No templates. No shortcuts." />
+  <meta property="og:site_name" content="Perfect Apps" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Perfect Apps — Custom Software Studio | Thrissur, India" />
+  <meta name="twitter:description" content="Custom web apps, SaaS products, APIs, and AI-powered solutions engineered for real businesses." />
+
+  <!-- Preconnects -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -34,7 +50,6 @@
       }
     }
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     * { box-sizing: border-box; }
@@ -60,12 +75,6 @@
       background: rgba(8, 11, 16, 0.85);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid #1C2333;
-    }
-
-    /* Three.js Canvas */
-    #hero-canvas {
-      position: absolute; inset: 0; z-index: 0;
-      pointer-events: none;
     }
 
     /* Glass card */
@@ -294,14 +303,50 @@
       border-bottom: 1px solid #1C2333;
     }
     #mobile-menu.open { display: block; }
+
+    /* Accessibility: focus-visible */
+    *:focus-visible {
+      outline: 2px solid #4F8EF7;
+      outline-offset: 2px;
+    }
+
+    /* Accessibility: skip-nav link */
+    .skip-nav {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+    .skip-nav:focus {
+      position: fixed; width: auto; height: auto;
+      padding: 0.5rem 1rem; margin: 0; overflow: visible;
+      clip: auto; white-space: normal;
+      top: 1rem; left: 1rem; z-index: 200;
+      background: #4F8EF7; color: white;
+      border-radius: 0.5rem; font-size: 0.875rem;
+    }
+
+    /* Accessibility: reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
   </style>
 </head>
 <body class="bg-pa-bg text-pa-text">
 
+<!-- Skip to main content -->
+<a href="#main" class="skip-nav">Skip to main content</a>
+
 <!-- ═══════════════════════════════════════
      NAVIGATION
 ═══════════════════════════════════════ -->
-<nav id="nav-bar" class="px-6 py-5 lg:px-12">
+<header>
+<nav id="nav-bar" class="px-6 py-5 lg:px-12" aria-label="Main navigation">
   <div class="max-w-7xl mx-auto flex items-center justify-between">
     <!-- Logo -->
     <a href="#" class="flex items-center gap-3 group">
@@ -326,8 +371,8 @@
       <a href="contact.html" class="hidden md:inline-flex btn-primary text-white text-sm font-medium px-5 py-2.5 rounded-lg">
         Start a Project
       </a>
-      <button id="menu-toggle" class="md:hidden text-pa-muted hover:text-pa-text transition-colors">
-        <i class="fa-solid fa-bars text-lg"></i>
+      <button id="menu-toggle" class="md:hidden text-pa-muted hover:text-pa-text transition-colors" aria-expanded="false" aria-controls="mobile-menu" aria-label="Toggle navigation menu">
+        <i class="fa-solid fa-bars text-lg" aria-hidden="true"></i>
       </button>
     </div>
   </div>
@@ -345,15 +390,14 @@
     </div>
   </div>
 </nav>
+</header>
 
+<main id="main">
 
 <!-- ═══════════════════════════════════════
-     HERO — 3D INTERACTIVE
+     HERO
 ═══════════════════════════════════════ -->
 <section id="hero" class="relative h-[900px] flex items-center overflow-hidden">
-
-  <!-- Three.js canvas -->
-  <canvas id="hero-canvas"></canvas>
 
   <!-- Radial glow -->
   <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 55% at 65% 45%, rgba(79,142,247,0.07) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 80% 30%, rgba(124,92,252,0.06) 0%, transparent 60%); z-index:1;"></div>
@@ -380,7 +424,7 @@
       <div class="flex flex-wrap gap-4 mb-14">
         <a href="contact.html" class="btn-primary inline-flex items-center gap-2 text-white text-sm font-semibold px-7 py-3.5 rounded-lg">
           Start a Project
-          <i class="fa-solid fa-arrow-right text-xs"></i>
+          <i class="fa-solid fa-arrow-right text-xs" aria-hidden="true"></i>
         </a>
         <a href="work.html" class="btn-ghost inline-flex items-center gap-2 text-pa-muted text-sm font-medium px-7 py-3.5 rounded-lg">
           View Our Work
@@ -539,7 +583,7 @@
         <h2 class="text-3xl lg:text-4xl font-bold tracking-tight">Work that speaks<br /><span class="gradient-text">for itself.</span></h2>
       </div>
       <a href="work.html" class="btn-ghost inline-flex items-center gap-2 text-sm text-pa-muted px-6 py-3 rounded-lg w-fit">
-        View All Projects <i class="fa-solid fa-arrow-right text-xs"></i>
+        View All Projects <i class="fa-solid fa-arrow-right text-xs" aria-hidden="true"></i>
       </a>
     </div>
 
@@ -677,7 +721,7 @@
 
       <div class="service-card glass rounded-2xl p-7 reveal" style="transition-delay:0.05s">
         <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-pa-accent/20 to-pa-accent/5 flex items-center justify-center mb-5 border border-pa-accent/20">
-          <i class="fa-solid fa-layer-group text-pa-accent text-base"></i>
+          <i class="fa-solid fa-layer-group text-pa-accent text-base" aria-hidden="true"></i>
         </div>
         <h3 class="font-semibold text-pa-text mb-3">Custom Web Applications</h3>
         <p class="text-sm text-pa-muted leading-relaxed mb-4">End-to-end web apps tailored to your exact workflow — no off-the-shelf compromises. Built to scale from day one.</p>
@@ -690,7 +734,7 @@
 
       <div class="service-card glass rounded-2xl p-7 reveal" style="transition-delay:0.1s">
         <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-pa-accent2/20 to-pa-accent2/5 flex items-center justify-center mb-5 border border-pa-accent2/20">
-          <i class="fa-solid fa-bolt text-pa-accent2 text-base"></i>
+          <i class="fa-solid fa-bolt text-pa-accent2 text-base" aria-hidden="true"></i>
         </div>
         <h3 class="font-semibold text-pa-text mb-3">SaaS Products</h3>
         <p class="text-sm text-pa-muted leading-relaxed mb-4">We help you launch subscription software with multi-tenancy, billing, auth, and admin — architecture that pays off.</p>
@@ -703,7 +747,7 @@
 
       <div class="service-card glass rounded-2xl p-7 reveal" style="transition-delay:0.15s">
         <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-400/20 to-blue-400/5 flex items-center justify-center mb-5 border border-blue-400/20">
-          <i class="fa-solid fa-plug text-blue-400 text-base"></i>
+          <i class="fa-solid fa-plug text-blue-400 text-base" aria-hidden="true"></i>
         </div>
         <h3 class="font-semibold text-pa-text mb-3">APIs & Integrations</h3>
         <p class="text-sm text-pa-muted leading-relaxed mb-4">Fast, documented, secure REST and GraphQL APIs. Connect your systems, payment gateways, ERPs, and third-party tools.</p>
@@ -716,7 +760,7 @@
 
       <div class="service-card glass rounded-2xl p-7 reveal" style="transition-delay:0.2s">
         <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-purple-400/20 to-purple-400/5 flex items-center justify-center mb-5 border border-purple-400/20">
-          <i class="fa-solid fa-brain text-purple-400 text-base"></i>
+          <i class="fa-solid fa-brain text-purple-400 text-base" aria-hidden="true"></i>
         </div>
         <h3 class="font-semibold text-pa-text mb-3">AI-Powered Solutions</h3>
         <p class="text-sm text-pa-muted leading-relaxed mb-4">Production-grade AI integrations — document parsing, chatbots, classification, prediction engines built into your product.</p>
@@ -729,7 +773,7 @@
 
       <div class="service-card glass rounded-2xl p-7 reveal" style="transition-delay:0.25s">
         <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-400/20 to-emerald-400/5 flex items-center justify-center mb-5 border border-emerald-400/20">
-          <i class="fa-solid fa-database text-emerald-400 text-base"></i>
+          <i class="fa-solid fa-database text-emerald-400 text-base" aria-hidden="true"></i>
         </div>
         <h3 class="font-semibold text-pa-text mb-3">Data Pipelines & Dashboards</h3>
         <p class="text-sm text-pa-muted leading-relaxed mb-4">Automated ETL, reporting dashboards, and business intelligence tools that turn raw data into clear decisions.</p>
@@ -742,7 +786,7 @@
 
       <div class="service-card glass rounded-2xl p-7 reveal" style="transition-delay:0.3s">
         <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-orange-400/20 to-orange-400/5 flex items-center justify-center mb-5 border border-orange-400/20">
-          <i class="fa-solid fa-server text-orange-400 text-base"></i>
+          <i class="fa-solid fa-server text-orange-400 text-base" aria-hidden="true"></i>
         </div>
         <h3 class="font-semibold text-pa-text mb-3">DevOps & Infrastructure</h3>
         <p class="text-sm text-pa-muted leading-relaxed mb-4">CI/CD pipelines, containerized deployments, auto-scaling infrastructure. We ship reliably and maintain carefully.</p>
@@ -772,38 +816,38 @@
         </h2>
         <p class="text-pa-muted leading-relaxed mb-8">We don't generalize. Every solution is shaped around your industry's real workflows, compliance needs, and operational realities.</p>
         <a href="use-cases.html" class="btn-ghost inline-flex items-center gap-2 text-sm text-pa-muted px-6 py-3 rounded-lg">
-          Explore All Use Cases <i class="fa-solid fa-arrow-right text-xs"></i>
+          Explore All Use Cases <i class="fa-solid fa-arrow-right text-xs" aria-hidden="true"></i>
         </a>
       </div>
 
       <div class="grid grid-cols-2 gap-3 reveal" style="transition-delay:0.2s">
         <div class="use-pill glass rounded-xl p-5">
-          <i class="fa-solid fa-truck-fast text-pa-accent mb-3 text-base"></i>
+          <i class="fa-solid fa-truck-fast text-pa-accent mb-3 text-base" aria-hidden="true"></i>
           <div class="text-sm font-medium text-pa-text mb-1">Logistics</div>
           <div class="text-xs text-pa-muted">Fleet tracking, route planning, delivery management</div>
         </div>
         <div class="use-pill glass rounded-xl p-5">
-          <i class="fa-solid fa-landmark text-pa-accent2 mb-3 text-base"></i>
+          <i class="fa-solid fa-landmark text-pa-accent2 mb-3 text-base" aria-hidden="true"></i>
           <div class="text-sm font-medium text-pa-text mb-1">Finance & CA</div>
           <div class="text-xs text-pa-muted">Audit tools, compliance, reporting automation</div>
         </div>
         <div class="use-pill glass rounded-xl p-5">
-          <i class="fa-solid fa-cart-shopping text-blue-400 mb-3 text-base"></i>
+          <i class="fa-solid fa-cart-shopping text-blue-400 mb-3 text-base" aria-hidden="true"></i>
           <div class="text-sm font-medium text-pa-text mb-1">E-Commerce</div>
           <div class="text-xs text-pa-muted">Custom storefronts, inventory, order management</div>
         </div>
         <div class="use-pill glass rounded-xl p-5">
-          <i class="fa-solid fa-hospital text-emerald-400 mb-3 text-base"></i>
+          <i class="fa-solid fa-hospital text-emerald-400 mb-3 text-base" aria-hidden="true"></i>
           <div class="text-sm font-medium text-pa-text mb-1">Healthcare</div>
           <div class="text-xs text-pa-muted">Patient portals, appointment systems, HIPAA-safe</div>
         </div>
         <div class="use-pill glass rounded-xl p-5">
-          <i class="fa-solid fa-graduation-cap text-purple-400 mb-3 text-base"></i>
+          <i class="fa-solid fa-graduation-cap text-purple-400 mb-3 text-base" aria-hidden="true"></i>
           <div class="text-sm font-medium text-pa-text mb-1">EdTech</div>
           <div class="text-xs text-pa-muted">LMS platforms, assessments, progress tracking</div>
         </div>
         <div class="use-pill glass rounded-xl p-5">
-          <i class="fa-solid fa-building text-orange-400 mb-3 text-base"></i>
+          <i class="fa-solid fa-building text-orange-400 mb-3 text-base" aria-hidden="true"></i>
           <div class="text-sm font-medium text-pa-text mb-1">Real Estate</div>
           <div class="text-xs text-pa-muted">Property management, CRM, listing platforms</div>
         </div>
@@ -837,7 +881,7 @@
           <div class="space-y-5 mb-6">
             <div class="flex gap-3 items-start">
               <div class="w-8 h-8 rounded-lg bg-pa-border flex items-center justify-center flex-shrink-0 mt-0.5">
-                <i class="fa-solid fa-code text-pa-accent text-xs"></i>
+                <i class="fa-solid fa-code text-pa-accent text-xs" aria-hidden="true"></i>
               </div>
               <div>
                 <div class="text-sm font-medium text-pa-text mb-1">Technical Depth</div>
@@ -846,7 +890,7 @@
             </div>
             <div class="flex gap-3 items-start">
               <div class="w-8 h-8 rounded-lg bg-pa-border flex items-center justify-center flex-shrink-0 mt-0.5">
-                <i class="fa-solid fa-handshake text-pa-accent2 text-xs"></i>
+                <i class="fa-solid fa-handshake text-pa-accent2 text-xs" aria-hidden="true"></i>
               </div>
               <div>
                 <div class="text-sm font-medium text-pa-text mb-1">Direct Partnership</div>
@@ -855,7 +899,7 @@
             </div>
             <div class="flex gap-3 items-start">
               <div class="w-8 h-8 rounded-lg bg-pa-border flex items-center justify-center flex-shrink-0 mt-0.5">
-                <i class="fa-solid fa-shield-halved text-blue-400 text-xs"></i>
+                <i class="fa-solid fa-shield-halved text-blue-400 text-xs" aria-hidden="true"></i>
               </div>
               <div>
                 <div class="text-sm font-medium text-pa-text mb-1">Reliable Delivery</div>
@@ -867,7 +911,7 @@
           <div class="gradient-line"></div>
           <div class="flex gap-6 pt-5">
             <div>
-              <div class="text-xl font-bold gradient-accent">Pune, IN</div>
+              <div class="text-xl font-bold gradient-accent">Thrissur, IN</div>
               <div class="text-xs text-pa-muted mt-0.5">Based in India</div>
             </div>
             <div class="w-px bg-pa-border"></div>
@@ -885,7 +929,7 @@
 
         <!-- Floating accent -->
         <div class="absolute -top-4 -right-4 w-20 h-20 rounded-2xl border border-pa-accent/20 bg-pa-accent/5 flex items-center justify-center" style="z-index:-1">
-          <i class="fa-solid fa-atom text-pa-accent/30 text-2xl"></i>
+          <i class="fa-solid fa-atom text-pa-accent/30 text-2xl" aria-hidden="true"></i>
         </div>
       </div>
 
@@ -896,13 +940,13 @@
           A small studio.<br /><span class="gradient-text">Serious software.</span>
         </h2>
         <p class="text-pa-muted leading-relaxed mb-5">
-          Perfect Apps is a boutique software engineering studio based in Pune, India. We're a tight team of engineers who care about craft — we don't take on more projects than we can do exceptionally well.
+          Perfect Apps is a boutique software engineering studio based in Thrissur, India. We're a tight team of engineers who care about craft — we don't take on more projects than we can do exceptionally well.
         </p>
         <p class="text-pa-muted leading-relaxed mb-8">
           We work best with businesses that want a long-term technical partner, not just a vendor. Our clients treat us as their engineering team — and we take that seriously.
         </p>
         <a href="about.html" class="btn-ghost inline-flex items-center gap-2 text-sm text-pa-muted px-6 py-3 rounded-lg">
-          Learn More About Us <i class="fa-solid fa-arrow-right text-xs"></i>
+          Learn More About Us <i class="fa-solid fa-arrow-right text-xs" aria-hidden="true"></i>
         </a>
       </div>
 
@@ -922,7 +966,7 @@
         <h2 class="text-3xl lg:text-4xl font-bold tracking-tight">Thinking out loud<br /><span class="gradient-text">on software.</span></h2>
       </div>
       <a href="blog.html" class="btn-ghost inline-flex items-center gap-2 text-sm text-pa-muted px-6 py-3 rounded-lg w-fit">
-        Read All Posts <i class="fa-solid fa-arrow-right text-xs"></i>
+        Read All Posts <i class="fa-solid fa-arrow-right text-xs" aria-hidden="true"></i>
       </a>
     </div>
 
@@ -936,7 +980,7 @@
         <h3 class="font-semibold text-pa-text text-base mb-3 leading-snug">When to build a SaaS product vs. a custom internal tool</h3>
         <p class="text-sm text-pa-muted leading-relaxed mb-5">The decision framework we walk every client through before writing a single line of code.</p>
         <a href="blog.html" class="inline-flex items-center gap-1.5 text-xs text-pa-accent font-medium hover:gap-2.5 transition-all">
-          Read More <i class="fa-solid fa-arrow-right text-xs"></i>
+          Read More <i class="fa-solid fa-arrow-right text-xs" aria-hidden="true"></i>
         </a>
       </article>
 
@@ -948,7 +992,7 @@
         <h3 class="font-semibold text-pa-text text-base mb-3 leading-snug">Integrating LLMs into production apps — 5 lessons we learned</h3>
         <p class="text-sm text-pa-muted leading-relaxed mb-5">Practical, hard-won lessons from shipping AI features that actually work in production environments.</p>
         <a href="blog.html" class="inline-flex items-center gap-1.5 text-xs text-pa-accent font-medium hover:gap-2.5 transition-all">
-          Read More <i class="fa-solid fa-arrow-right text-xs"></i>
+          Read More <i class="fa-solid fa-arrow-right text-xs" aria-hidden="true"></i>
         </a>
       </article>
 
@@ -960,7 +1004,7 @@
         <h3 class="font-semibold text-pa-text text-base mb-3 leading-snug">Designing APIs that scale: versioning, pagination, and error handling</h3>
         <p class="text-sm text-pa-muted leading-relaxed mb-5">How we structure REST APIs at Perfect Apps to be pleasant to consume and painless to evolve.</p>
         <a href="blog.html" class="inline-flex items-center gap-1.5 text-xs text-pa-accent font-medium hover:gap-2.5 transition-all">
-          Read More <i class="fa-solid fa-arrow-right text-xs"></i>
+          Read More <i class="fa-solid fa-arrow-right text-xs" aria-hidden="true"></i>
         </a>
       </article>
 
@@ -989,25 +1033,25 @@
 
         <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
           <a href="contact.html" class="btn-primary inline-flex items-center justify-center gap-2 text-white text-sm font-semibold px-8 py-4 rounded-xl">
-            Start a Project <i class="fa-solid fa-arrow-right text-xs"></i>
+            Start a Project <i class="fa-solid fa-arrow-right text-xs" aria-hidden="true"></i>
           </a>
-          <a href="mailto:hello@perfectapps.in" class="btn-ghost inline-flex items-center justify-center gap-2 text-pa-muted text-sm font-medium px-8 py-4 rounded-xl">
-            <i class="fa-solid fa-envelope text-xs"></i>
-            hello@perfectapps.in
+          <a href="mailto:deffrin@gmail.com" class="btn-ghost inline-flex items-center justify-center gap-2 text-pa-muted text-sm font-medium px-8 py-4 rounded-xl">
+            <i class="fa-solid fa-envelope text-xs" aria-hidden="true"></i>
+            deffrin@gmail.com
           </a>
         </div>
 
         <div class="flex flex-wrap gap-6 justify-center">
           <div class="flex items-center gap-2 text-xs text-pa-muted">
-            <i class="fa-solid fa-check text-green-400 text-xs"></i>
+            <i class="fa-solid fa-check text-green-400 text-xs" aria-hidden="true"></i>
             Free consultation
           </div>
           <div class="flex items-center gap-2 text-xs text-pa-muted">
-            <i class="fa-solid fa-check text-green-400 text-xs"></i>
+            <i class="fa-solid fa-check text-green-400 text-xs" aria-hidden="true"></i>
             NDA on request
           </div>
           <div class="flex items-center gap-2 text-xs text-pa-muted">
-            <i class="fa-solid fa-check text-green-400 text-xs"></i>
+            <i class="fa-solid fa-check text-green-400 text-xs" aria-hidden="true"></i>
             24h response
           </div>
         </div>
@@ -1016,6 +1060,8 @@
 
   </div>
 </section>
+
+</main>
 
 <!-- ═══════════════════════════════════════
      FOOTER
@@ -1062,8 +1108,8 @@
       <div>
         <div class="text-xs font-semibold text-pa-text mb-4 tracking-wider uppercase">Contact</div>
         <ul class="space-y-2.5">
-          <li class="text-sm text-pa-muted">hello@perfectapps.in</li>
-          <li class="text-sm text-pa-muted">Pune, Maharashtra, India</li>
+          <li class="text-sm text-pa-muted">deffrin@gmail.com</li>
+          <li class="text-sm text-pa-muted">Thrissur, Kerala, India</li>
           <li class="text-sm text-pa-muted font-mono">perfectapps.in</li>
         </ul>
       </div>
@@ -1073,11 +1119,7 @@
     <div class="gradient-line mb-6"></div>
 
     <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-      <span class="text-xs text-pa-muted font-mono">© 2025 Perfect Apps · All rights reserved</span>
-      <div class="flex gap-5">
-        <a href="#" class="text-xs text-pa-muted hover:text-pa-text transition-colors">Privacy Policy</a>
-        <a href="#" class="text-xs text-pa-muted hover:text-pa-text transition-colors">Terms of Service</a>
-      </div>
+      <span class="text-xs text-pa-muted font-mono">© 2026 Perfect Apps · All rights reserved</span>
     </div>
   </div>
 </footer>
@@ -1094,8 +1136,11 @@
   });
 
   // ── Mobile menu ──
-  document.getElementById('menu-toggle').addEventListener('click', () => {
-    document.getElementById('mobile-menu').classList.toggle('open');
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuToggle.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', isOpen);
   });
 
   // ── Scroll reveal ──
@@ -1123,204 +1168,6 @@
     });
   }
 
-  // ── THREE.JS HERO SCENE ──
-  window.addEventListener('load', () => {
-    try {
-      const canvas = document.getElementById('hero-canvas');
-      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.setSize(canvas.parentElement.clientWidth, canvas.parentElement.clientHeight);
-      renderer.setClearColor(0x000000, 0);
-
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(60, canvas.parentElement.clientWidth / canvas.parentElement.clientHeight, 0.1, 1000);
-      camera.position.set(0, 0, 28);
-
-      // Lighting
-      const ambientLight = new THREE.AmbientLight(0xffffff, 0.15);
-      scene.add(ambientLight);
-      const blueLight = new THREE.PointLight(0x4F8EF7, 2.5, 80);
-      blueLight.position.set(15, 10, 20);
-      scene.add(blueLight);
-      const purpleLight = new THREE.PointLight(0x7C5CFC, 1.8, 80);
-      purpleLight.position.set(-15, -8, 15);
-      scene.add(purpleLight);
-
-      // ── Particle field ──
-      const particleCount = 320;
-      const positions = new Float32Array(particleCount * 3);
-      const colors = new Float32Array(particleCount * 3);
-      for (let i = 0; i < particleCount; i++) {
-        positions[i * 3]     = (Math.random() - 0.5) * 80;
-        positions[i * 3 + 1] = (Math.random() - 0.5) * 60;
-        positions[i * 3 + 2] = (Math.random() - 0.5) * 40 - 5;
-        const t = Math.random();
-        if (t < 0.5) {
-          colors[i * 3] = 0.31; colors[i * 3 + 1] = 0.56; colors[i * 3 + 2] = 0.97;
-        } else {
-          colors[i * 3] = 0.49; colors[i * 3 + 1] = 0.36; colors[i * 3 + 2] = 0.99;
-        }
-      }
-      const partGeo = new THREE.BufferGeometry();
-      partGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-      partGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-      const partMat = new THREE.PointsMaterial({ size: 0.18, vertexColors: true, transparent: true, opacity: 0.55, sizeAttenuation: true });
-      const particles = new THREE.Points(partGeo, partMat);
-      scene.add(particles);
-
-      // ── Geometric objects ──
-      // Icosahedron — main centerpiece
-      const icoGeo = new THREE.IcosahedronGeometry(5, 1);
-      const icoMat = new THREE.MeshStandardMaterial({
-        color: 0x1a2540,
-        metalness: 0.8,
-        roughness: 0.3,
-        emissive: 0x0D2070,
-        emissiveIntensity: 0.2,
-        wireframe: false,
-        transparent: true,
-        opacity: 0.7,
-      });
-      const ico = new THREE.Mesh(icoGeo, icoMat);
-      ico.position.set(14, 2, -5);
-      scene.add(ico);
-
-      // Wireframe overlay on ico
-      const icoWireGeo = new THREE.IcosahedronGeometry(5.05, 1);
-      const icoWireMat = new THREE.MeshBasicMaterial({ color: 0x4F8EF7, wireframe: true, transparent: true, opacity: 0.25 });
-      const icoWire = new THREE.Mesh(icoWireGeo, icoWireMat);
-      icoWire.position.copy(ico.position);
-      scene.add(icoWire);
-
-      // Torus
-      const torusGeo = new THREE.TorusGeometry(3.5, 0.6, 16, 60);
-      const torusMat = new THREE.MeshStandardMaterial({
-        color: 0x0d1030,
-        metalness: 0.9,
-        roughness: 0.2,
-        emissive: 0x2a0d70,
-        emissiveIntensity: 0.3,
-        transparent: true,
-        opacity: 0.8,
-      });
-      const torus = new THREE.Mesh(torusGeo, torusMat);
-      torus.position.set(-16, -4, -8);
-      torus.rotation.x = 0.5;
-      scene.add(torus);
-
-      // Torus wireframe ring
-      const torusWireGeo = new THREE.TorusGeometry(3.52, 0.62, 8, 60);
-      const torusWireMat = new THREE.MeshBasicMaterial({ color: 0x7C5CFC, wireframe: true, transparent: true, opacity: 0.3 });
-      const torusWire = new THREE.Mesh(torusWireGeo, torusWireMat);
-      torusWire.position.copy(torus.position);
-      torusWire.rotation.copy(torus.rotation);
-      scene.add(torusWire);
-
-      // Octahedron
-      const octaGeo = new THREE.OctahedronGeometry(2.5, 0);
-      const octaMat = new THREE.MeshStandardMaterial({ color: 0x0d1825, metalness: 0.7, roughness: 0.4, emissive: 0x0a1f50, emissiveIntensity: 0.4, transparent: true, opacity: 0.75 });
-      const octa = new THREE.Mesh(octaGeo, octaMat);
-      octa.position.set(5, -10, -3);
-      scene.add(octa);
-
-      // Octahedron wire
-      const octaWireGeo = new THREE.OctahedronGeometry(2.55, 0);
-      const octaWireMat = new THREE.MeshBasicMaterial({ color: 0x4F8EF7, wireframe: true, transparent: true, opacity: 0.35 });
-      const octaWire = new THREE.Mesh(octaWireGeo, octaWireMat);
-      octaWire.position.copy(octa.position);
-      scene.add(octaWire);
-
-      // ── Node connection lines ──
-      const nodePositions = [
-        new THREE.Vector3(14, 2, -5),    // ico
-        new THREE.Vector3(-16, -4, -8),  // torus
-        new THREE.Vector3(5, -10, -3),   // octa
-        new THREE.Vector3(-6, 8, -10),
-        new THREE.Vector3(20, -8, -12),
-      ];
-
-      const linePairs = [[0,1],[0,2],[1,2],[2,3],[0,3],[0,4]];
-      linePairs.forEach(([a, b]) => {
-        const lineGeo = new THREE.BufferGeometry().setFromPoints([nodePositions[a], nodePositions[b]]);
-        const lineMat = new THREE.LineBasicMaterial({ color: 0x4F8EF7, transparent: true, opacity: 0.12 });
-        scene.add(new THREE.Line(lineGeo, lineMat));
-      });
-
-      // Small node dots
-      nodePositions.slice(3).forEach(pos => {
-        const dotGeo = new THREE.SphereGeometry(0.3, 8, 8);
-        const dotMat = new THREE.MeshBasicMaterial({ color: 0x7C5CFC, transparent: true, opacity: 0.7 });
-        const dot = new THREE.Mesh(dotGeo, dotMat);
-        dot.position.copy(pos);
-        scene.add(dot);
-      });
-
-      // ── Mouse tracking ──
-      let mouseX = 0, mouseY = 0;
-      let targetX = 0, targetY = 0;
-      document.addEventListener('mousemove', (e) => {
-        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-        mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-      });
-
-      // ── Scroll tracking ──
-      let scrollY = 0;
-      window.addEventListener('scroll', () => { scrollY = window.scrollY; });
-
-      // ── Resize ──
-      window.addEventListener('resize', () => {
-        const w = canvas.parentElement.clientWidth;
-        const h = canvas.parentElement.clientHeight;
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
-        renderer.setSize(w, h);
-      });
-
-      // ── Animation loop ──
-      const clock = new THREE.Clock();
-      function animate() {
-        requestAnimationFrame(animate);
-        const t = clock.getElapsedTime();
-
-        // Ease mouse
-        targetX += (mouseX - targetX) * 0.04;
-        targetY += (mouseY - targetY) * 0.04;
-
-        // Camera gentle drift
-        camera.position.x += (targetX * 3 - camera.position.x) * 0.02;
-        camera.position.y += (-targetY * 2 - camera.position.y) * 0.02;
-        camera.lookAt(0, 0, 0);
-
-        // Rotate geometries
-        ico.rotation.y = t * 0.18 + targetX * 0.3;
-        ico.rotation.x = t * 0.10 + targetY * 0.2;
-        icoWire.rotation.copy(ico.rotation);
-
-        torus.rotation.z = t * 0.12;
-        torus.rotation.y = targetX * 0.25;
-        torusWire.rotation.copy(torus.rotation);
-
-        octa.rotation.x = t * 0.22 + targetY * 0.3;
-        octa.rotation.z = t * 0.15;
-        octaWire.rotation.copy(octa.rotation);
-
-        // Particles slow rotation
-        particles.rotation.y = t * 0.015;
-        particles.rotation.x = t * 0.008;
-
-        // Scroll: push scene back
-        const scrollOffset = scrollY * 0.018;
-        scene.position.y = -scrollOffset;
-        scene.position.z = -scrollOffset * 0.3;
-
-        renderer.render(scene, camera);
-      }
-      animate();
-
-    } catch(e) {
-      console.warn('Three.js scene init failed:', e);
-    }
-  });
 </script>
 
 </body>
