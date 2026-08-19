@@ -1,1174 +1,532 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Perfect Apps — We Make Websites, Online Stores, Web & Mobile Apps | Thrissur, India</title>
-  <meta name="description" content="Perfect Apps is a  software studio building custom web apps, SaaS products, APIs, and AI-powered solutions for real businesses. Based in Thrissur, India." />
-  <meta name="keywords" content="custom software development, web applications, SaaS, API development, AI solutions, software studio, Thrissur, India" />
-  <meta name="author" content="Perfect Apps" />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://perfectapps.in/" />
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://perfectapps.in/" />
-  <meta property="og:title" content="Perfect Apps — Custom Software Studio | Thrissur, India" />
-  <meta property="og:description" content="Custom web apps, SaaS products, APIs, and AI-powered solutions engineered for real businesses. No templates. No shortcuts." />
-  <meta property="og:site_name" content="Perfect Apps" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Perfect Apps — Custom Software Studio | Thrissur, India" />
-  <meta name="twitter:description" content="Custom web apps, SaaS products, APIs, and AI-powered solutions engineered for real businesses." />
-
-  <!-- Preconnects -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
-
+  <script>
+    window.FontAwesomeConfig = {
+      autoReplaceSvg: 'nest'
+    };
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous"
+    referrerpolicy="no-referrer"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Perfect Apps - App Design Studio In Thrissur For Online Stores, Web Apps, Mobile Apps</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
         extend: {
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
           colors: {
-            'pa-bg': '#080B10',
-            'pa-surface': '#0D1117',
-            'pa-border': '#1C2333',
-            'pa-accent': '#4F8EF7',
-            'pa-accent2': '#7C5CFC',
-            'pa-muted': '#8B949E',
-            'pa-text': '#E6EDF3',
+            ink: '#0f172a',
+            slate: '#475569',
+            line: '#e2e8f0',
+            paper: '#ffffff',
+            surface: '#f8fafc',
+            brand: '#0052ff',
           },
-          fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-            mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+          transitionTimingFunction: {
+            fluid: 'cubic-bezier(0.165, 0.84, 0.44, 1)',
           },
-        }
-      }
-    }
+          keyframes: {
+            marquee: {
+              '0%': { transform: 'translateX(0)' },
+              '100%': { transform: 'translateX(-50%)' },
+            },
+          },
+          animation: {
+            marquee: 'marquee 30s linear infinite',
+          },
+        },
+      },
+    };
   </script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
     body {
-      background-color: #080B10;
-      color: #E6EDF3;
       font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Scrollbar */
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: #080B10; }
-    ::-webkit-scrollbar-thumb { background: #1C2333; border-radius: 2px; }
-
-    /* Nav */
-    #nav-bar {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      transition: background 0.4s, backdrop-filter 0.4s, border-color 0.4s;
-    }
-    #nav-bar.scrolled {
-      background: rgba(8, 11, 16, 0.85);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid #1C2333;
+    .text-huge {
+      font-size: clamp(4rem, 12vw, 10rem);
+      line-height: 0.9;
+      letter-spacing: -0.04em;
     }
 
-    /* Glass card */
-    .glass {
-      background: rgba(13, 17, 23, 0.7);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(79, 142, 247, 0.12);
-    }
-    .glass-strong {
-      background: rgba(13, 17, 23, 0.9);
-      backdrop-filter: blur(24px);
-      border: 1px solid rgba(79, 142, 247, 0.18);
+    .text-large {
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 1;
+      letter-spacing: -0.03em;
     }
 
-    /* Glow effects */
-    .glow-blue { box-shadow: 0 0 40px rgba(79, 142, 247, 0.15), 0 0 80px rgba(79, 142, 247, 0.05); }
-    .glow-purple { box-shadow: 0 0 40px rgba(124, 92, 252, 0.15), 0 0 80px rgba(124, 92, 252, 0.05); }
-    .text-glow { text-shadow: 0 0 40px rgba(79, 142, 247, 0.5); }
-
-    /* Gradient text */
-    .gradient-text {
-      background: linear-gradient(135deg, #E6EDF3 30%, #4F8EF7 70%, #7C5CFC 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .gradient-accent {
-      background: linear-gradient(135deg, #4F8EF7, #7C5CFC);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    /* Noise grain overlay */
-    body::before {
+    .nav-link::after {
       content: '';
-      position: fixed; inset: 0; z-index: 1000;
-      pointer-events: none;
-      opacity: 0.018;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-    }
-
-    /* Animated gradient line */
-    .gradient-line {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, #4F8EF7, #7C5CFC, transparent);
-      opacity: 0.4;
-    }
-
-    /* Code block */
-    .code-block {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem;
-      line-height: 1.7;
-      background: rgba(13, 17, 23, 0.95);
-      border: 1px solid #1C2333;
-      border-radius: 12px;
-      padding: 1.25rem 1.5rem;
-    }
-    .code-line-num { color: #3D444D; user-select: none; margin-right: 1.5rem; }
-    .code-keyword { color: #FF7B72; }
-    .code-string { color: #A5D6FF; }
-    .code-func { color: #D2A8FF; }
-    .code-comment { color: #3D444D; }
-    .code-var { color: #79C0FF; }
-
-    /* Service card hover */
-    .service-card {
-      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
-      border: 1px solid #1C2333;
-      cursor: default;
-    }
-    .service-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(79, 142, 247, 0.35);
-      box-shadow: 0 20px 60px rgba(79, 142, 247, 0.1), 0 0 0 1px rgba(79, 142, 247, 0.08);
-    }
-
-    /* Project card */
-    .project-card {
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-      cursor: default;
-    }
-    .project-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 32px 80px rgba(0,0,0,0.6);
-    }
-    .project-card:hover .project-overlay {
-      opacity: 1;
-    }
-    .project-overlay {
-      opacity: 0;
-      transition: opacity 0.35s ease;
-    }
-
-    /* Use case pill */
-    .use-pill {
-      transition: all 0.3s ease;
-      border: 1px solid #1C2333;
-    }
-    .use-pill:hover {
-      border-color: rgba(79, 142, 247, 0.4);
-      background: rgba(79, 142, 247, 0.06);
-    }
-
-    /* Blog card */
-    .blog-card {
-      transition: transform 0.35s ease, border-color 0.35s ease;
-      border: 1px solid #1C2333;
-    }
-    .blog-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(79, 142, 247, 0.3);
-    }
-
-    /* CTA button */
-    .btn-primary {
-      background: linear-gradient(135deg, #4F8EF7, #7C5CFC);
-      transition: opacity 0.25s, transform 0.25s, box-shadow 0.25s;
-      box-shadow: 0 4px 24px rgba(79, 142, 247, 0.35);
-    }
-    .btn-primary:hover {
-      opacity: 0.92;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 40px rgba(79, 142, 247, 0.5);
-    }
-    .btn-ghost {
-      border: 1px solid #1C2333;
-      transition: border-color 0.25s, background 0.25s, transform 0.25s;
-    }
-    .btn-ghost:hover {
-      border-color: rgba(79, 142, 247, 0.5);
-      background: rgba(79, 142, 247, 0.06);
-      transform: translateY(-2px);
-    }
-
-    /* Floating window UI mock */
-    .app-window {
-      background: rgba(13, 17, 23, 0.92);
-      border: 1px solid rgba(79, 142, 247, 0.2);
-      border-radius: 14px;
-      overflow: hidden;
-      backdrop-filter: blur(20px);
-    }
-    .window-bar {
-      background: rgba(28, 35, 51, 0.8);
-      padding: 8px 14px;
-      display: flex; align-items: center; gap: 6px;
-    }
-    .dot { width: 9px; height: 9px; border-radius: 50%; }
-
-    /* Counter animation */
-    @keyframes count-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-    .stat-num { animation: count-up 0.6s ease forwards; }
-
-    /* Scroll fade in */
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.75s ease, transform 0.75s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Orbit dot */
-    @keyframes orbit {
-      from { transform: rotate(0deg) translateX(60px) rotate(0deg); }
-      to   { transform: rotate(360deg) translateX(60px) rotate(-360deg); }
-    }
-    .orbit-dot {
-      animation: orbit 8s linear infinite;
       position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: #0052ff;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
 
-    /* Node pulse */
-    @keyframes node-pulse {
-      0%, 100% { opacity: 0.3; transform: scale(1); }
-      50% { opacity: 0.8; transform: scale(1.4); }
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      transform: scaleX(1);
+      transform-origin: left;
     }
 
-    /* Typewriter cursor */
-    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-    .cursor { display: inline-block; animation: blink 1s step-end infinite; }
-
-    /* Tech badge */
-    .tech-badge {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
-      padding: 3px 10px;
-      border-radius: 20px;
-      border: 1px solid #1C2333;
-      color: #8B949E;
-      background: rgba(13,17,23,0.8);
+    .portfolio-item:hover .portfolio-img {
+      transform: scale(1.05);
+      filter: grayscale(0%);
     }
 
-    /* Tag */
-    .tag {
-      font-size: 0.68rem;
-      padding: 3px 10px;
-      border-radius: 20px;
-      background: rgba(79,142,247,0.1);
-      color: #4F8EF7;
-      border: 1px solid rgba(79,142,247,0.2);
-      font-family: 'JetBrains Mono', monospace;
+    .portfolio-item:hover .portfolio-overlay {
+      opacity: 1;
     }
 
-    /* Connecting line SVG */
-    .connector { stroke: rgba(79,142,247,0.2); stroke-width: 1; fill: none; stroke-dasharray: 4 4; }
-
-    /* Section label */
-    .section-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
-      color: #4F8EF7;
-      text-transform: uppercase;
-    }
-
-    /* Mobile menu */
-    #mobile-menu {
+    .no-scrollbar::-webkit-scrollbar {
       display: none;
-      background: rgba(8,11,16,0.97);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid #1C2333;
-    }
-    #mobile-menu.open { display: block; }
-
-    /* Accessibility: focus-visible */
-    *:focus-visible {
-      outline: 2px solid #4F8EF7;
-      outline-offset: 2px;
     }
 
-    /* Accessibility: skip-nav link */
-    .skip-nav {
-      position: absolute; width: 1px; height: 1px;
-      padding: 0; margin: -1px; overflow: hidden;
-      clip: rect(0,0,0,0); white-space: nowrap; border: 0;
-    }
-    .skip-nav:focus {
-      position: fixed; width: auto; height: auto;
-      padding: 0.5rem 1rem; margin: 0; overflow: visible;
-      clip: auto; white-space: normal;
-      top: 1rem; left: 1rem; z-index: 200;
-      background: #4F8EF7; color: white;
-      border-radius: 0.5rem; font-size: 0.875rem;
-    }
-
-    /* Accessibility: reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-      }
-      .reveal { opacity: 1; transform: none; }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
     }
   </style>
 </head>
-<body class="bg-pa-bg text-pa-text">
 
-<!-- Skip to main content -->
-<a href="#main" class="skip-nav">Skip to main content</a>
+<body class="bg-paper text-ink overflow-x-hidden">
 
-<!-- ═══════════════════════════════════════
-     NAVIGATION
-═══════════════════════════════════════ -->
-<header>
-<nav id="nav-bar" class="px-6 py-5 lg:px-12" aria-label="Main navigation">
-  <div class="max-w-7xl mx-auto flex items-center justify-between">
-    <!-- Logo -->
-    <a href="#" class="flex items-center gap-3 group">
-      <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-pa-accent to-pa-accent2 flex items-center justify-center">
-        <span class="text-white font-mono font-bold text-sm">P</span>
-      </div>
-      <span class="font-semibold text-pa-text tracking-tight">Perfect Apps</span>
-    </a>
-
-    <!-- Desktop Nav -->
-    <div class="hidden md:flex items-center gap-8">
-      <a href="#" class="text-sm text-pa-text font-medium hover:text-pa-accent transition-colors">Home</a>
-      <a href="work.html" class="text-sm text-pa-muted hover:text-pa-text transition-colors">Work</a>
-      <a href="use-cases.html" class="text-sm text-pa-muted hover:text-pa-text transition-colors">Use Cases</a>
-      <a href="about.html" class="text-sm text-pa-muted hover:text-pa-text transition-colors">About</a>
-      <a href="blog.html" class="text-sm text-pa-muted hover:text-pa-text transition-colors">Blog</a>
-      <a href="contact.html" class="text-sm text-pa-muted hover:text-pa-text transition-colors">Contact</a>
-    </div>
-
-    <!-- CTA + Hamburger -->
-    <div class="flex items-center gap-4">
-      <a href="contact.html" class="hidden md:inline-flex btn-primary text-white text-sm font-medium px-5 py-2.5 rounded-lg">
-        Start a Project
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 w-full z-50 bg-white backdrop-blur-md border-b border-line px-6 py-4">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <a href="#" class="flex items-center gap-2 group">
+        <img src="header-logo.png" class="h-10" alt="PerfectApps.in Logo" />
       </a>
-      <button id="menu-toggle" class="md:hidden text-pa-muted hover:text-pa-text transition-colors" aria-expanded="false" aria-controls="mobile-menu" aria-label="Toggle navigation menu">
-        <i class="fa-solid fa-bars text-lg" aria-hidden="true"></i>
-      </button>
-    </div>
-  </div>
 
-  <!-- Mobile Menu -->
-  <div id="mobile-menu">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-4">
-      <a href="#" class="text-sm text-pa-text py-2">Home</a>
-      <a href="work.html" class="text-sm text-pa-muted py-2">Work</a>
-      <a href="use-cases.html" class="text-sm text-pa-muted py-2">Use Cases</a>
-      <a href="about.html" class="text-sm text-pa-muted py-2">About</a>
-      <a href="blog.html" class="text-sm text-pa-muted py-2">Blog</a>
-      <a href="contact.html" class="text-sm text-pa-muted py-2">Contact</a>
-      <a href="contact.html" class="btn-primary text-white text-sm font-medium px-5 py-2.5 rounded-lg text-center mt-2">Start a Project</a>
-    </div>
-  </div>
-</nav>
-</header>
-
-<main id="main">
-
-<!-- ═══════════════════════════════════════
-     HERO
-═══════════════════════════════════════ -->
-<section id="hero" class="relative h-[900px] flex items-center overflow-hidden">
-
-  <!-- Radial glow -->
-  <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 55% at 65% 45%, rgba(79,142,247,0.07) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 80% 30%, rgba(124,92,252,0.06) 0%, transparent 60%); z-index:1;"></div>
-
-  <!-- Hero content -->
-  <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full grid lg:grid-cols-2 gap-16 items-center">
-
-    <!-- Left: Text -->
-    <div>
-      <div class="section-label mb-6 flex items-center gap-2">
-        <span class="w-6 h-px bg-pa-accent inline-block"></span>
-        perfectapps.in
+      <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate">
+        <a href="#services" class="hover:text-brand transition-colors">Services</a>
+        <a href="#portfolio" class="hover:text-brand transition-colors">Our Work</a>
+        <a href="#process" class="hover:text-brand transition-colors">How We Work</a>
+        <a href="#about" class="hover:text-brand transition-colors">About</a>
       </div>
 
-      <h1 class="text-4xl lg:text-6xl font-bold leading-tight tracking-tight mb-6">
-        We Build Software<br />
-        <span class="gradient-text">That Solves Real<br />Problems.</span>
-      </h1>
+      <div class="flex items-center gap-4">
+        <a href="https://wa.me/919946218608?text=Hi%2C+I+just+saw+your+website+and+I+like+to+know+more+about+your+services."
+          class="hidden sm:block text-sm font-semibold text-ink">+91 9946 218608 - Deffrin Joseph</a>
+        <a href="https://wa.me/919946218608?text=Hi%2C+I%27d+like+to+get+a+quote+for+a+new+project."
+          class="bg-brand text-white px-6 py-2.5 rounded-lg text-sm font-bold hover:bg-ink transition-all duration-300 shadow-md shadow-brand/20">Get
+          a Quote</a>
+      </div>
+    </div>
+  </nav>
 
-      <p class="text-pa-muted text-base lg:text-lg leading-relaxed mb-10 max-w-lg">
-        Custom software, web apps and digital solutions engineered for real businesses. No templates. No shortcuts. Precise, scalable software built to last.
-      </p>
+  <!-- Hero Section -->
+  <header class="relative pt-40 pb-20 px-6 overflow-hidden bg-white">
+    <!-- Abstract Background Elements for Trust -->
+    <div class="absolute top-0 right-0 w-1/2 h-full bg-slate-50/50 -z-10 rounded-l-[100px]"></div>
 
-      <div class="flex flex-wrap gap-4 mb-14">
-        <a href="contact.html" class="btn-primary inline-flex items-center gap-2 text-white text-sm font-semibold px-7 py-3.5 rounded-lg">
-          Start a Project
-          <i class="fa-solid fa-arrow-right text-xs" aria-hidden="true"></i>
+    <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+      <div class="space-y-10">
+        <!-- Attention (AIDA) -->
+        <div
+          class="inline-flex items-center gap-2 px-3 py-1 bg-brand/5 border border-brand/10 rounded-full text-brand text-xs font-bold tracking-wider">
+          <i class="fa-solid fa-star text-[10px]"></i>
+          Experts in Websites & Online Stores
+        </div>
+
+        <h1 class="text-[52px] lg:text-[72px] leading-[1.05] font-black text-ink tracking-tight">
+      #1 App Design Studio <span class="text-brand"> in THRISSUR</span>
+        </h1>
+
+        <!-- Interest (AIDA) -->
+        <p class="text-xl text-slate leading-relaxed max-w-xl">
+          We specialize in building <span class="text-ink font-semibold">Online Stores, Websites and Mobile Apps</span>.
+        </p>
+
+        <p class="text-xl text-slate leading-relaxed max-w-xl">
+          We also offer products such as <span class="text-ink font-semibold">FormRecipe.com</span>, <span
+            class="text-ink font-semibold">FocusBoard.work</span>, <span
+            class="text-ink font-semibold">Pocket-Radio.com</span> & <span
+            class="text-ink font-semibold">Cherukatha.com</span>.
+        </p>
+
+        <!-- Desire (AIDA) -->
+        <div class="space-y-4">
+          <div class="flex items-start gap-3">
+            <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+              <i class="fa-solid fa-check text-green-600 text-[10px]"></i>
+            </div>
+            <p class="text-slate text-sm font-medium">Conversion Optimized.</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+              <i class="fa-solid fa-check text-green-600 text-[10px]"></i>
+            </div>
+            <p class="text-slate text-sm font-medium">Improved User Experience.</p>
+          </div>
+        </div>
+
+        <!-- Action (AIDA) -->
+        <div class="flex flex-col sm:flex-row items-center gap-6 pt-4">
+          <a href="https://wa.me/919946218608?text=Hi%2C+I%27d+like+to+work+with+you+for+my+business"
+            class="w-full sm:w-auto px-10 py-5 bg-ink text-white rounded-xl text-lg font-bold hover:bg-brand transition-all duration-300 flex items-center justify-center gap-3">
+            Work With Us
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+          <div class="flex items-center gap-4">
+            <div class="flex -space-x-3">
+              <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg"
+                class="w-10 h-10 rounded-full border-2 border-white object-cover" alt="Client">
+              <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg"
+                class="w-10 h-10 rounded-full border-2 border-white object-cover" alt="Client">
+              <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg"
+                class="w-10 h-10 rounded-full border-2 border-white object-cover" alt="Client">
+            </div>
+            <div class="text-sm font-medium">
+              <span class="text-ink font-bold block">Trusted by 200+</span>
+              <span class="text-slate text-xs uppercase tracking-tighter">Global Businesses</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- EEAT: Trust Badges -->
+        <!-- <div class="pt-8 border-t border-line">
+                    <p class="text-[10px] font-bold text-slate/40 uppercase tracking-[0.2em] mb-6">Expertise & Certifications</p>
+                    <div class="flex flex-wrap items-center gap-8 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-brands fa-shopify text-2xl"></i>
+                            <span class="text-sm font-bold">Shopify Plus Partner</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-brands fa-google text-2xl"></i>
+                            <span class="text-sm font-bold">Google Cloud Certified</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-brands fa-aws text-2xl"></i>
+                            <span class="text-sm font-bold">AWS Architecture</span>
+                        </div>
+                    </div>
+                </div> -->
+      </div>
+
+      <div class="relative">
+        <!-- Main Product Image -->
+        <div
+          class="relative z-10 rounded-3xl overflow-hidden shadow-[0_32px_64px_-12px_rgba(0,82,255,0.15)] bg-surface border border-line">
+          <img class="w-full h-auto"
+            src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_1feee890df_a7424b05d35b26a7.png"
+            alt="High-performance e-commerce dashboard and mobile app interface" />
+        </div>
+
+        <!-- Background Decoration -->
+        <div class="absolute -top-12 -right-12 w-64 h-64 bg-brand/5 rounded-full blur-3xl -z-10"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Services Section -->
+  <section id="services" class="py-32 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row justify-between items-center mb-20">
+        <h2 class="text-large font-bold max-w-xl">Our Expertise</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Service 1 -->
+        <div class="group cursor-pointer">
+          <div class="aspect-[4/3] rounded-3xl overflow-hidden mb-6 bg-surface">
+            <img
+              class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:saturate-100"
+              src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_0fe7386ee2_74580c427676d519.png"
+              alt="abstract 3D render representing e-commerce, floating shopping cart and product cards in soft pastel " />
+          </div>
+          <h3 class="text-2xl font-semibold mb-2">E-commerce Solutions</h3>
+          <p class="text-slate">Custom Shopify and headless stores built to convert.</p>
+        </div>
+        <!-- Service 2 -->
+        <div class="group cursor-pointer">
+          <div class="aspect-[4/3] rounded-3xl overflow-hidden mb-6 bg-surface">
+            <img
+              class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:saturate-100"
+              src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_0fe7386ee2_ae3b4fe1f887ed94.png"
+              alt="abstract 3D render representing web development, code brackets and layered browser windows, soft neu" />
+          </div>
+          <h3 class="text-2xl font-semibold mb-2">Web Development</h3>
+          <p class="text-slate">Fast, accessible, and scalable front-end engineering.</p>
+        </div>
+        <!-- Service 3 -->
+        <div class="group cursor-pointer">
+          <div class="aspect-[4/3] rounded-3xl overflow-hidden mb-6 bg-surface">
+            <img
+              class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:saturate-100"
+              src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_0fe7386ee2_7dca31a552a23b48.png"
+              alt="abstract 3D render representing mobile apps, stacked smartphone screens with clean UI, soft neutral " />
+          </div>
+          <h3 class="text-2xl font-semibold mb-2">Mobile App Design</h3>
+          <p class="text-slate">Intuitive interfaces for iOS and Android platforms.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Index -->
+  <section id="portfolio" class="py-32 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row justify-between items-end mb-20">
+        <h2 class="text-large font-bold">Our Work</h2>
+        <a href="#" class="nav-link relative text-sm font-semibold mt-6 md:mt-0">View All Projects →</a>
+      </div>
+
+      <div class="grid md:grid-cols-12 gap-6">
+
+        <!-- Project 1 — Large -->
+        <a href="https://rajadhani.deffrinjoseph.com/"
+          class="portfolio-item md:col-span-7 md:row-span-2 group block relative rounded-3xl overflow-hidden aspect-[4/3]">
+
+          <img
+            class="portfolio-img w-full h-full object-cover transition-all duration-1000 grayscale-[0.3] group-hover:scale-105"
+            src="rajadhani-furniture.png" alt="Rajadhani Furniture website" />
+
+          <div
+            class="portfolio-overlay absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-10">
+            <span class="text-white text-3xl font-semibold">
+              Rajadhani Furniture
+            </span>
+            <span class="text-white/70">
+              Website Development • WhatsApp Integration
+            </span>
+          </div>
+
         </a>
-        <a href="work.html" class="btn-ghost inline-flex items-center gap-2 text-pa-muted text-sm font-medium px-7 py-3.5 rounded-lg">
-          View Our Work
+
+
+        <!-- Project 2 -->
+        <a href="https://cherukatha.com"
+          class="portfolio-item md:col-span-5 group block relative rounded-3xl overflow-hidden aspect-[4/3]">
+
+          <img
+            class="portfolio-img w-full h-full object-cover transition-all duration-1000 grayscale-[0.3] group-hover:scale-105"
+            src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_5f0b4f5021_22cee2673f8ed282.png"
+            alt="Cherukatha.com web app" />
+
+          <div
+            class="portfolio-overlay absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+            <span class="text-white text-xl font-semibold">
+              Cherukatha.com
+            </span>
+            <span class="text-white/70">
+              Web App for Malayalam Short Stories
+            </span>
+          </div>
+
         </a>
-      </div>
 
-      <!-- Stats row -->
-      <div class="flex gap-10">
-        <div>
-          <div class="text-2xl font-bold text-pa-text gradient-accent stat-num">50+</div>
-          <div class="text-xs text-pa-muted mt-1">Projects Delivered</div>
+
+        <!-- Project 3 -->
+        <a href="#" class="portfolio-item md:col-span-5 group block relative rounded-3xl overflow-hidden aspect-[4/3]">
+
+          <img
+            class="portfolio-img w-full h-full object-cover transition-all duration-1000 grayscale-[0.3] group-hover:scale-105"
+            src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_1fb7d9fd0f_7b4655a4d2177512.png"
+            alt="FormRecipe.com online form builder" />
+
+          <div
+            class="portfolio-overlay absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+            <span class="text-white text-xl font-semibold">
+              Form Recipe
+            </span>
+            <span class="text-white/70">
+              Online Form Builder
+            </span>
+          </div>
+
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section id="process" class="py-32 px-6 border-t border-line">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-large font-bold mb-20">How We Work</h2>
+      <div class="divide-y divide-line border-t border-line">
+        <div class="group py-12 flex flex-col md:flex-row md:items-center gap-6">
+          <div class="flex items-center gap-12 md:gap-20 min-w-[600px]">
+            <span class="text-sm font-semibold text-slate/40">01</span>
+            <h3 class="text-3xl md:text-5xl font-medium">Discovery</h3>
+          </div>
+          <p class="text-slate md:max-w-md">We will talk with you and will understand your goals to define a clear
+            strategy.</p>
+          <i fa-icon=""
+            class="fa-solid fa-arrow-right text-brand opacity-0 group-hover:opacity-100 transition-opacity"></i>
         </div>
-        <div class="w-px bg-pa-border"></div>
-        <div>
-          <div class="text-2xl font-bold text-pa-text gradient-accent stat-num">8+</div>
-          <div class="text-xs text-pa-muted mt-1">Years Experience</div>
+        <div class="group py-12 flex flex-col md:flex-row md:items-center gap-6">
+          <div class="flex items-center gap-12 md:gap-20 min-w-[600px]">
+            <span class="text-sm font-semibold text-slate/40">02</span>
+            <h3 class="text-3xl md:text-5xl font-medium">Design</h3>
+          </div>
+          <p class="text-slate md:max-w-md">We start with wireframes and then build prototype.</p>
+          <i fa-icon=""
+            class="fa-solid fa-arrow-right text-brand opacity-0 group-hover:opacity-100 transition-opacity"></i>
         </div>
-        <div class="w-px bg-pa-border"></div>
-        <div>
-          <div class="text-2xl font-bold text-pa-text gradient-accent stat-num">100%</div>
-          <div class="text-xs text-pa-muted mt-1">Client Retention</div>
+        <div class="group py-12 flex flex-col md:flex-row md:items-center gap-6">
+          <div class="flex items-center gap-12 md:gap-20 min-w-[600px]">
+            <span class="text-sm font-semibold text-slate/40">03</span>
+            <h3 class="text-3xl md:text-5xl font-medium">Development</h3>
+          </div>
+          <p class="text-slate md:max-w-md">We write clean code to power scalable solutions.</p>
+          <i fa-icon=""
+            class="fa-solid fa-arrow-right text-brand opacity-0 group-hover:opacity-100 transition-opacity"></i>
+        </div>
+        <div class="group py-12 flex flex-col md:flex-row md:items-center gap-6">
+          <div class="flex items-center gap-12 md:gap-20 min-w-[600px]">
+            <span class="text-sm font-semibold text-slate/40">04</span>
+            <h3 class="text-3xl md:text-5xl font-medium">Launch</h3>
+          </div>
+          <p class="text-slate md:max-w-md">We ship, watch, and improve everyday - to support your business 24/7.</p>
+          <i fa-icon=""
+            class="fa-solid fa-arrow-right text-brand opacity-0 group-hover:opacity-100 transition-opacity"></i>
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- Right: Floating UI Panels -->
-    <div class="hidden lg:flex relative h-[500px] items-center justify-center" id="hero-panels">
+  <!-- About Section -->
+  <section id="about" class="py-32 px-6 bg-surface border-t border-line">
+    <div class="max-w-7xl mx-auto">
 
-      <!-- App Window 1 — Dashboard mock -->
-      <div class="app-window absolute top-0 left-4 w-72 shadow-2xl glow-blue" style="z-index:5;" id="panel-1">
-        <div class="window-bar">
-          <div class="dot" style="background:#FF5F56"></div>
-          <div class="dot" style="background:#FFBD2E"></div>
-          <div class="dot" style="background:#27C93F"></div>
-          <span class="ml-3 text-xs text-pa-muted font-mono">analytics_dashboard.tsx</span>
+      <div class="grid lg:grid-cols-12 gap-16 items-start">
+
+        <!-- Heading -->
+        <div class="lg:col-span-5">
+          <span class="text-brand text-xs font-bold uppercase tracking-[0.2em]">
+            About Us
+          </span>
+
+          <h2 class="text-large font-bold mt-6">
+            Perfect Apps - For Small Businesses
+          </h2>
         </div>
-        <div class="p-4">
-          <div class="text-xs text-pa-muted mb-3 font-mono">Revenue Overview</div>
-          <div class="flex gap-2 mb-3">
-            <div class="flex-1 bg-pa-border rounded h-16 flex items-end p-1 gap-1">
-              <div class="flex-1 rounded-sm" style="height:40%;background:rgba(79,142,247,0.4)"></div>
-              <div class="flex-1 rounded-sm" style="height:65%;background:rgba(79,142,247,0.5)"></div>
-              <div class="flex-1 rounded-sm" style="height:50%;background:rgba(79,142,247,0.4)"></div>
-              <div class="flex-1 rounded-sm" style="height:80%;background:rgba(79,142,247,0.7)"></div>
-              <div class="flex-1 rounded-sm" style="height:90%;background:#4F8EF7"></div>
+
+        <!-- Content -->
+        <div class="lg:col-span-7 space-y-8">
+<p class="text-xl text-slate leading-relaxed">
+          Perfect Apps is a app design studio. Here we design web & mobile apps. We create user experiences and digital solutions to transform your business online.</p>
+
+          <p class="text-lg text-slate leading-relaxed">
+            We are from
+            <span class="text-ink font-semibold">Thrissur, Kerala</span>.
+            We help businesses turn ideas into fast, reliable and easy-to-use digital products.
+          </p>
+
+          <p class="text-lg text-slate leading-relaxed">
+            From <span class="text-ink font-semibold">online stores and business websites</span>
+            to <span class="text-ink font-semibold">web applications and mobile apps</span>,
+            we work closely with our clients from the initial idea to launch and beyond.
+          </p>
+
+          <!-- Stats -->
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-8 pt-8 border-t border-line">
+
+            <div>
+              <div class="text-4xl font-bold text-ink">50+</div>
+              <div class="text-sm text-slate mt-2">
+                Web Projects
+              </div>
             </div>
-          </div>
-          <div class="flex justify-between items-center">
-            <span class="text-xs text-pa-muted font-mono">Total MRR</span>
-            <span class="text-sm font-bold text-pa-text">₹2.4L</span>
-          </div>
-          <div class="mt-2 h-1 bg-pa-border rounded-full overflow-hidden">
-            <div class="h-full rounded-full bg-gradient-to-r from-pa-accent to-pa-accent2" style="width:74%"></div>
-          </div>
-          <div class="flex gap-2 mt-3">
-            <span class="tag">+18.4%</span>
-            <span class="text-xs text-pa-muted font-mono self-center">vs last month</span>
-          </div>
-        </div>
-      </div>
 
-      <!-- Code Window -->
-      <div class="app-window absolute bottom-0 right-0 w-80 shadow-2xl glow-purple" style="z-index:4;" id="panel-2">
-        <div class="window-bar">
-          <div class="dot" style="background:#FF5F56"></div>
-          <div class="dot" style="background:#FFBD2E"></div>
-          <div class="dot" style="background:#27C93F"></div>
-          <span class="ml-3 text-xs text-pa-muted font-mono">api_handler.py</span>
-        </div>
-        <div class="code-block m-0 rounded-none border-0 border-t border-pa-border text-xs">
-          <div><span class="code-line-num">1</span><span class="code-keyword">async def</span> <span class="code-func">process_order</span>(order_id: <span class="code-var">str</span>):</div>
-          <div><span class="code-line-num">2</span>  <span class="code-comment"># Validate & enrich</span></div>
-          <div><span class="code-line-num">3</span>  order = <span class="code-keyword">await</span> <span class="code-func">db.get</span>(<span class="code-string">"orders"</span>, order_id)</div>
-          <div><span class="code-line-num">4</span>  result = <span class="code-keyword">await</span> <span class="code-func">ai_engine.classify</span>(order)</div>
-          <div><span class="code-line-num">5</span>  <span class="code-keyword">return</span> <span class="code-func">APIResponse</span>(result, <span class="code-var">200</span>)</div>
-          <div><span class="code-line-num">6</span><span class="cursor text-pa-accent">▌</span></div>
-        </div>
-      </div>
+            <div>
+              <div class="text-4xl font-bold text-ink">12+</div>
+              <div class="text-sm text-slate mt-2">
+                Years in Web Development
+              </div>
+            </div>
 
-      <!-- Status card -->
-      <div class="app-window absolute top-36 right-8 w-56" style="z-index:6;" id="panel-3">
-        <div class="p-4">
-          <div class="flex items-center gap-2 mb-3">
-            <div class="w-2 h-2 rounded-full bg-green-400" style="box-shadow:0 0 6px #4ade80"></div>
-            <span class="text-xs font-mono text-pa-muted">System Status</span>
-          </div>
-          <div class="space-y-2">
-            <div class="flex justify-between items-center">
-              <span class="text-xs text-pa-muted font-mono">API Latency</span>
-              <span class="text-xs text-green-400 font-mono">42ms</span>
+            <div>
+              <div class="text-4xl font-bold text-ink">3+</div>
+              <div class="text-sm text-slate mt-2">
+                Own Products
+              </div>
             </div>
-            <div class="flex justify-between items-center">
-              <span class="text-xs text-pa-muted font-mono">Uptime</span>
-              <span class="text-xs text-green-400 font-mono">99.97%</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <span class="text-xs text-pa-muted font-mono">AI Model</span>
-              <span class="text-xs text-pa-accent font-mono">v2.1</span>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- Node graph -->
-      <div class="absolute inset-0 pointer-events-none" style="z-index:3;">
-        <svg width="100%" height="100%" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid meet" opacity="0.35">
-          <circle cx="250" cy="250" r="4" fill="#4F8EF7"/>
-          <circle cx="120" cy="130" r="3" fill="#7C5CFC"/>
-          <circle cx="380" cy="150" r="3" fill="#4F8EF7"/>
-          <circle cx="100" cy="370" r="2.5" fill="#4F8EF7" opacity="0.6"/>
-          <circle cx="400" cy="380" r="2.5" fill="#7C5CFC" opacity="0.6"/>
-          <line x1="250" y1="250" x2="120" y2="130" class="connector"/>
-          <line x1="250" y1="250" x2="380" y2="150" class="connector"/>
-          <line x1="250" y1="250" x2="100" y2="370" class="connector"/>
-          <line x1="250" y1="250" x2="400" y2="380" class="connector"/>
-          <line x1="120" y1="130" x2="380" y2="150" class="connector"/>
-        </svg>
+          </div>
+
+          <!-- CTA -->
+          <div class="pt-4">
+            <a href="https://wa.me/919946218608?text=Hi%2C+I%27d+like+to+work+with+you+for+my+business"
+              class="inline-flex items-center gap-3 text-brand font-semibold hover:text-ink transition-colors">
+              Let's talk about your project
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+
+        </div>
       </div>
 
     </div>
-  </div>
+  </section>
 
-  <!-- Bottom gradient -->
-  <div class="absolute bottom-0 left-0 right-0 h-32 pointer-events-none" style="background: linear-gradient(to bottom, transparent, #080B10); z-index:8;"></div>
-</section>
-
-<!-- ═══════════════════════════════════════
-     TRUSTED BY / TECH STACK
-═══════════════════════════════════════ -->
-<section class="py-12 border-t border-pa-border" id="tech-stack">
-  <div class="max-w-7xl mx-auto px-6 lg:px-12">
-    <div class="flex flex-wrap items-center gap-8 lg:gap-16 justify-center opacity-50">
-      <span class="tech-badge">React</span>
-      <span class="tech-badge">Next.js</span>
-      <span class="tech-badge">Python</span>
-      <span class="tech-badge">FastAPI</span>
-      <span class="tech-badge">PostgreSQL</span>
-      <span class="tech-badge">Node.js</span>
-      <span class="tech-badge">AWS</span>
-      <span class="tech-badge">OpenAI</span>
-      <span class="tech-badge">Docker</span>
-      <span class="tech-badge">Stripe</span>
+  <!-- CTA / Contact Section -->
+  <section id="contact" class="py-40 px-6 bg-brand text-white">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
+      <h2 class="text-large font-bold">Ready to grow?</h2>
+      <a href="https://wa.me/919946218608?text=Hi%2C+I%27d+like+to+work+with+you+for+my+business"
+        class="border border-white px-10 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-brand transition-all duration-500">Work
+        With Us</a>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ═══════════════════════════════════════
-     SELECTED PROJECTS
-═══════════════════════════════════════ -->
-<section id="projects" class="py-24 lg:py-32">
-  <div class="max-w-7xl mx-auto px-6 lg:px-12">
-
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 reveal">
+  <!-- Footer -->
+  <footer class="px-6 py-20 border-t border-line">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-12">
       <div>
-        <div class="section-label mb-4">Selected Projects</div>
-        <h2 class="text-3xl lg:text-4xl font-bold tracking-tight">Work that speaks<br /><span class="gradient-text">for itself.</span></h2>
-      </div>
-      <a href="work.html" class="btn-ghost inline-flex items-center gap-2 text-sm text-pa-muted px-6 py-3 rounded-lg w-fit">
-        View All Projects <i class="fa-solid fa-arrow-right text-xs" aria-hidden="true"></i>
+        <a href="#" class="flex items-center gap-2 group">
+        <img src="header-logo.png" class="h-12" alt="PerfectApps.in Logo" />
       </a>
-    </div>
-
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-      <!-- Project 1 -->
-      <div class="project-card glass rounded-2xl overflow-hidden reveal" style="transition-delay:0.1s">
-        <div class="relative h-52 overflow-hidden" style="background: linear-gradient(135deg, #0D1117, #1C2333);">
-          <!-- UI mock -->
-          <div class="absolute inset-4 app-window opacity-80">
-            <div class="window-bar" style="padding:6px 10px">
-              <div class="dot" style="background:#FF5F56;width:7px;height:7px"></div>
-              <div class="dot" style="background:#FFBD2E;width:7px;height:7px"></div>
-              <div class="dot" style="background:#27C93F;width:7px;height:7px"></div>
-            </div>
-            <div class="p-3">
-              <div class="flex gap-2 mb-2">
-                <div class="h-2 bg-pa-accent rounded-full" style="width:40%;opacity:0.5"></div>
-                <div class="h-2 bg-pa-border rounded-full" style="width:30%"></div>
-              </div>
-              <div class="grid grid-cols-3 gap-2">
-                <div class="h-10 bg-pa-border rounded-lg"></div>
-                <div class="h-10 rounded-lg" style="background:rgba(79,142,247,0.15)"></div>
-                <div class="h-10 bg-pa-border rounded-lg"></div>
-              </div>
-              <div class="mt-2 h-1.5 bg-pa-border rounded-full overflow-hidden">
-                <div class="h-full rounded-full bg-gradient-to-r from-pa-accent to-pa-accent2" style="width:60%"></div>
-              </div>
-            </div>
-          </div>
-          <div class="project-overlay absolute inset-0 bg-pa-accent/10 flex items-center justify-center">
-            <span class="btn-ghost text-xs px-4 py-2 rounded-lg text-pa-text">View Project</span>
-          </div>
-        </div>
-        <div class="p-6">
-          <div class="flex gap-2 mb-3">
-            <span class="tag">SaaS</span>
-            <span class="tag">React</span>
-          </div>
-          <h3 class="font-semibold text-pa-text mb-2">Fleet Management Platform</h3>
-          <p class="text-sm text-pa-muted leading-relaxed">Real-time vehicle tracking, route optimization, and driver analytics for a logistics company managing 400+ vehicles.</p>
-        </div>
-      </div>
-
-      <!-- Project 2 -->
-      <div class="project-card glass rounded-2xl overflow-hidden reveal" style="transition-delay:0.2s">
-        <div class="relative h-52 overflow-hidden" style="background: linear-gradient(135deg, #0D1117, #1A1026);">
-          <div class="absolute inset-4 app-window opacity-80">
-            <div class="window-bar" style="padding:6px 10px">
-              <div class="dot" style="background:#FF5F56;width:7px;height:7px"></div>
-              <div class="dot" style="background:#FFBD2E;width:7px;height:7px"></div>
-              <div class="dot" style="background:#27C93F;width:7px;height:7px"></div>
-            </div>
-            <div class="p-3">
-              <div class="code-block p-2 text-xs m-0 rounded border-0" style="background:rgba(13,17,23,0.5)">
-                <div><span class="code-keyword">const</span> <span class="code-var">insight</span> = <span class="code-keyword">await</span> ai.<span class="code-func">analyze</span>(data)</div>
-                <div class="mt-1"><span class="code-string">→ Anomaly detected at row 47</span></div>
-              </div>
-              <div class="mt-2 flex gap-2">
-                <div class="h-6 flex-1 rounded bg-pa-border"></div>
-                <div class="h-6 w-16 rounded" style="background:rgba(124,92,252,0.3)"></div>
-              </div>
-            </div>
-          </div>
-          <div class="project-overlay absolute inset-0 bg-pa-accent2/10 flex items-center justify-center">
-            <span class="btn-ghost text-xs px-4 py-2 rounded-lg text-pa-text">View Project</span>
-          </div>
-        </div>
-        <div class="p-6">
-          <div class="flex gap-2 mb-3">
-            <span class="tag">AI/ML</span>
-            <span class="tag">Python</span>
-          </div>
-          <h3 class="font-semibold text-pa-text mb-2">AI-Powered Audit Tool</h3>
-          <p class="text-sm text-pa-muted leading-relaxed">Automated financial statement analysis with anomaly detection and AI-generated audit recommendations for CA firms.</p>
-        </div>
-      </div>
-
-      <!-- Project 3 -->
-      <div class="project-card glass rounded-2xl overflow-hidden md:col-span-2 lg:col-span-1 reveal" style="transition-delay:0.3s">
-        <div class="relative h-52 overflow-hidden" style="background: linear-gradient(135deg, #080B10, #0D1A17);">
-          <div class="absolute inset-4 app-window opacity-80">
-            <div class="window-bar" style="padding:6px 10px">
-              <div class="dot" style="background:#FF5F56;width:7px;height:7px"></div>
-              <div class="dot" style="background:#FFBD2E;width:7px;height:7px"></div>
-              <div class="dot" style="background:#27C93F;width:7px;height:7px"></div>
-            </div>
-            <div class="p-3">
-              <div class="flex items-center gap-2 mb-2">
-                <div class="w-2 h-2 rounded-full bg-green-400"></div>
-                <span class="text-xs font-mono text-pa-muted">API /v2/orders — 200 OK</span>
-              </div>
-              <div class="h-1.5 bg-pa-border rounded-full overflow-hidden mb-3">
-                <div class="h-full rounded-full bg-green-500/60" style="width:92%"></div>
-              </div>
-              <div class="flex gap-2">
-                <div class="text-xs font-mono text-pa-muted">Req/s</div>
-                <div class="text-xs font-mono text-green-400">2,847</div>
-              </div>
-            </div>
-          </div>
-          <div class="project-overlay absolute inset-0 bg-green-500/5 flex items-center justify-center">
-            <span class="btn-ghost text-xs px-4 py-2 rounded-lg text-pa-text">View Project</span>
-          </div>
-        </div>
-        <div class="p-6">
-          <div class="flex gap-2 mb-3">
-            <span class="tag">API</span>
-            <span class="tag">FastAPI</span>
-          </div>
-          <h3 class="font-semibold text-pa-text mb-2">E-Commerce API Gateway</h3>
-          <p class="text-sm text-pa-muted leading-relaxed">High-throughput REST API handling 3M+ daily requests for a D2C brand — inventory, orders, payments, and logistics unified.</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════
-     WHAT WE BUILD
-═══════════════════════════════════════ -->
-<section id="services" class="py-24 lg:py-32 border-t border-pa-border">
-  <div class="max-w-7xl mx-auto px-6 lg:px-12">
-
-    <div class="text-center mb-16 reveal">
-      <div class="section-label mb-4 justify-center flex">What We Build</div>
-      <h2 class="text-3xl lg:text-4xl font-bold tracking-tight mb-4">
-        Software for every layer<br /><span class="gradient-text">of your business.</span>
-      </h2>
-      <p class="text-pa-muted max-w-xl mx-auto">From customer-facing interfaces to backend infrastructure — we architect and build end-to-end.</p>
-    </div>
-
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-
-      <div class="service-card glass rounded-2xl p-7 reveal" style="transition-delay:0.05s">
-        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-pa-accent/20 to-pa-accent/5 flex items-center justify-center mb-5 border border-pa-accent/20">
-          <i class="fa-solid fa-layer-group text-pa-accent text-base" aria-hidden="true"></i>
-        </div>
-        <h3 class="font-semibold text-pa-text mb-3">Custom Web Applications</h3>
-        <p class="text-sm text-pa-muted leading-relaxed mb-4">End-to-end web apps tailored to your exact workflow — no off-the-shelf compromises. Built to scale from day one.</p>
-        <div class="flex gap-2 flex-wrap">
-          <span class="tech-badge">React</span>
-          <span class="tech-badge">Next.js</span>
-          <span class="tech-badge">Node</span>
-        </div>
-      </div>
-
-      <div class="service-card glass rounded-2xl p-7 reveal" style="transition-delay:0.1s">
-        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-pa-accent2/20 to-pa-accent2/5 flex items-center justify-center mb-5 border border-pa-accent2/20">
-          <i class="fa-solid fa-bolt text-pa-accent2 text-base" aria-hidden="true"></i>
-        </div>
-        <h3 class="font-semibold text-pa-text mb-3">SaaS Products</h3>
-        <p class="text-sm text-pa-muted leading-relaxed mb-4">We help you launch subscription software with multi-tenancy, billing, auth, and admin — architecture that pays off.</p>
-        <div class="flex gap-2 flex-wrap">
-          <span class="tech-badge">Stripe</span>
-          <span class="tech-badge">Postgres</span>
-          <span class="tech-badge">AWS</span>
-        </div>
-      </div>
-
-      <div class="service-card glass rounded-2xl p-7 reveal" style="transition-delay:0.15s">
-        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-400/20 to-blue-400/5 flex items-center justify-center mb-5 border border-blue-400/20">
-          <i class="fa-solid fa-plug text-blue-400 text-base" aria-hidden="true"></i>
-        </div>
-        <h3 class="font-semibold text-pa-text mb-3">APIs & Integrations</h3>
-        <p class="text-sm text-pa-muted leading-relaxed mb-4">Fast, documented, secure REST and GraphQL APIs. Connect your systems, payment gateways, ERPs, and third-party tools.</p>
-        <div class="flex gap-2 flex-wrap">
-          <span class="tech-badge">FastAPI</span>
-          <span class="tech-badge">GraphQL</span>
-          <span class="tech-badge">Webhooks</span>
-        </div>
-      </div>
-
-      <div class="service-card glass rounded-2xl p-7 reveal" style="transition-delay:0.2s">
-        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-purple-400/20 to-purple-400/5 flex items-center justify-center mb-5 border border-purple-400/20">
-          <i class="fa-solid fa-brain text-purple-400 text-base" aria-hidden="true"></i>
-        </div>
-        <h3 class="font-semibold text-pa-text mb-3">AI-Powered Solutions</h3>
-        <p class="text-sm text-pa-muted leading-relaxed mb-4">Production-grade AI integrations — document parsing, chatbots, classification, prediction engines built into your product.</p>
-        <div class="flex gap-2 flex-wrap">
-          <span class="tech-badge">OpenAI</span>
-          <span class="tech-badge">LangChain</span>
-          <span class="tech-badge">Python</span>
-        </div>
-      </div>
-
-      <div class="service-card glass rounded-2xl p-7 reveal" style="transition-delay:0.25s">
-        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-emerald-400/20 to-emerald-400/5 flex items-center justify-center mb-5 border border-emerald-400/20">
-          <i class="fa-solid fa-database text-emerald-400 text-base" aria-hidden="true"></i>
-        </div>
-        <h3 class="font-semibold text-pa-text mb-3">Data Pipelines & Dashboards</h3>
-        <p class="text-sm text-pa-muted leading-relaxed mb-4">Automated ETL, reporting dashboards, and business intelligence tools that turn raw data into clear decisions.</p>
-        <div class="flex gap-2 flex-wrap">
-          <span class="tech-badge">PostgreSQL</span>
-          <span class="tech-badge">Redis</span>
-          <span class="tech-badge">Airflow</span>
-        </div>
-      </div>
-
-      <div class="service-card glass rounded-2xl p-7 reveal" style="transition-delay:0.3s">
-        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-orange-400/20 to-orange-400/5 flex items-center justify-center mb-5 border border-orange-400/20">
-          <i class="fa-solid fa-server text-orange-400 text-base" aria-hidden="true"></i>
-        </div>
-        <h3 class="font-semibold text-pa-text mb-3">DevOps & Infrastructure</h3>
-        <p class="text-sm text-pa-muted leading-relaxed mb-4">CI/CD pipelines, containerized deployments, auto-scaling infrastructure. We ship reliably and maintain carefully.</p>
-        <div class="flex gap-2 flex-wrap">
-          <span class="tech-badge">Docker</span>
-          <span class="tech-badge">GitHub Actions</span>
-          <span class="tech-badge">AWS</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════
-     USE CASES
-═══════════════════════════════════════ -->
-<section id="use-cases" class="py-24 lg:py-32">
-  <div class="max-w-7xl mx-auto px-6 lg:px-12">
-
-    <div class="grid lg:grid-cols-2 gap-16 items-center">
-
-      <div class="reveal">
-        <div class="section-label mb-4">Use Cases</div>
-        <h2 class="text-3xl lg:text-4xl font-bold tracking-tight mb-6">
-          Built for industries<br /><span class="gradient-text">that need precision.</span>
-        </h2>
-        <p class="text-pa-muted leading-relaxed mb-8">We don't generalize. Every solution is shaped around your industry's real workflows, compliance needs, and operational realities.</p>
-        <a href="use-cases.html" class="btn-ghost inline-flex items-center gap-2 text-sm text-pa-muted px-6 py-3 rounded-lg">
-          Explore All Use Cases <i class="fa-solid fa-arrow-right text-xs" aria-hidden="true"></i>
-        </a>
-      </div>
-
-      <div class="grid grid-cols-2 gap-3 reveal" style="transition-delay:0.2s">
-        <div class="use-pill glass rounded-xl p-5">
-          <i class="fa-solid fa-truck-fast text-pa-accent mb-3 text-base" aria-hidden="true"></i>
-          <div class="text-sm font-medium text-pa-text mb-1">Logistics</div>
-          <div class="text-xs text-pa-muted">Fleet tracking, route planning, delivery management</div>
-        </div>
-        <div class="use-pill glass rounded-xl p-5">
-          <i class="fa-solid fa-landmark text-pa-accent2 mb-3 text-base" aria-hidden="true"></i>
-          <div class="text-sm font-medium text-pa-text mb-1">Finance & CA</div>
-          <div class="text-xs text-pa-muted">Audit tools, compliance, reporting automation</div>
-        </div>
-        <div class="use-pill glass rounded-xl p-5">
-          <i class="fa-solid fa-cart-shopping text-blue-400 mb-3 text-base" aria-hidden="true"></i>
-          <div class="text-sm font-medium text-pa-text mb-1">E-Commerce</div>
-          <div class="text-xs text-pa-muted">Custom storefronts, inventory, order management</div>
-        </div>
-        <div class="use-pill glass rounded-xl p-5">
-          <i class="fa-solid fa-hospital text-emerald-400 mb-3 text-base" aria-hidden="true"></i>
-          <div class="text-sm font-medium text-pa-text mb-1">Healthcare</div>
-          <div class="text-xs text-pa-muted">Patient portals, appointment systems, HIPAA-safe</div>
-        </div>
-        <div class="use-pill glass rounded-xl p-5">
-          <i class="fa-solid fa-graduation-cap text-purple-400 mb-3 text-base" aria-hidden="true"></i>
-          <div class="text-sm font-medium text-pa-text mb-1">EdTech</div>
-          <div class="text-xs text-pa-muted">LMS platforms, assessments, progress tracking</div>
-        </div>
-        <div class="use-pill glass rounded-xl p-5">
-          <i class="fa-solid fa-building text-orange-400 mb-3 text-base" aria-hidden="true"></i>
-          <div class="text-sm font-medium text-pa-text mb-1">Real Estate</div>
-          <div class="text-xs text-pa-muted">Property management, CRM, listing platforms</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════
-     ABOUT PERFECT APPS
-═══════════════════════════════════════ -->
-<section id="about" class="py-24 lg:py-32 border-t border-pa-border">
-  <div class="max-w-7xl mx-auto px-6 lg:px-12">
-
-    <div class="grid lg:grid-cols-2 gap-16 items-center">
-
-      <!-- Visual -->
-      <div class="relative reveal">
-        <div class="glass-strong rounded-2xl p-8 glow-blue">
-          <div class="flex items-center gap-3 mb-6">
-            <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-pa-accent to-pa-accent2 flex items-center justify-center">
-              <span class="text-white font-mono font-bold text-sm">P</span>
-            </div>
-            <div>
-              <div class="text-sm font-semibold text-pa-text">Perfect Apps</div>
-              <div class="text-xs text-pa-muted font-mono">perfectapps.in</div>
-            </div>
-          </div>
-
-          <div class="space-y-5 mb-6">
-            <div class="flex gap-3 items-start">
-              <div class="w-8 h-8 rounded-lg bg-pa-border flex items-center justify-center flex-shrink-0 mt-0.5">
-                <i class="fa-solid fa-code text-pa-accent text-xs" aria-hidden="true"></i>
-              </div>
-              <div>
-                <div class="text-sm font-medium text-pa-text mb-1">Technical Depth</div>
-                <div class="text-xs text-pa-muted leading-relaxed">We're engineers first. Every line of code is considered for performance, security, and long-term maintainability.</div>
-              </div>
-            </div>
-            <div class="flex gap-3 items-start">
-              <div class="w-8 h-8 rounded-lg bg-pa-border flex items-center justify-center flex-shrink-0 mt-0.5">
-                <i class="fa-solid fa-handshake text-pa-accent2 text-xs" aria-hidden="true"></i>
-              </div>
-              <div>
-                <div class="text-sm font-medium text-pa-text mb-1">Direct Partnership</div>
-                <div class="text-xs text-pa-muted leading-relaxed">No account managers or outsourced teams. You work directly with the engineers who build your product.</div>
-              </div>
-            </div>
-            <div class="flex gap-3 items-start">
-              <div class="w-8 h-8 rounded-lg bg-pa-border flex items-center justify-center flex-shrink-0 mt-0.5">
-                <i class="fa-solid fa-shield-halved text-blue-400 text-xs" aria-hidden="true"></i>
-              </div>
-              <div>
-                <div class="text-sm font-medium text-pa-text mb-1">Reliable Delivery</div>
-                <div class="text-xs text-pa-muted leading-relaxed">Consistent timelines, honest communication, and post-launch support as standard — not optional.</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="gradient-line"></div>
-          <div class="flex gap-6 pt-5">
-            <div>
-              <div class="text-xl font-bold gradient-accent">Thrissur, IN</div>
-              <div class="text-xs text-pa-muted mt-0.5">Based in India</div>
-            </div>
-            <div class="w-px bg-pa-border"></div>
-            <div>
-              <div class="text-xl font-bold gradient-accent">Global</div>
-              <div class="text-xs text-pa-muted mt-0.5">Clients Served</div>
-            </div>
-            <div class="w-px bg-pa-border"></div>
-            <div>
-              <div class="text-xl font-bold gradient-accent">2016</div>
-              <div class="text-xs text-pa-muted mt-0.5">Founded</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Floating accent -->
-        <div class="absolute -top-4 -right-4 w-20 h-20 rounded-2xl border border-pa-accent/20 bg-pa-accent/5 flex items-center justify-center" style="z-index:-1">
-          <i class="fa-solid fa-atom text-pa-accent/30 text-2xl" aria-hidden="true"></i>
-        </div>
-      </div>
-
-      <!-- Text -->
-      <div class="reveal" style="transition-delay:0.2s">
-        <div class="section-label mb-4">About Perfect Apps</div>
-        <h2 class="text-3xl lg:text-4xl font-bold tracking-tight mb-6">
-          A small studio.<br /><span class="gradient-text">Serious software.</span>
-        </h2>
-        <p class="text-pa-muted leading-relaxed mb-5">
-          Perfect Apps is a boutique software engineering studio based in Thrissur, India. We're a tight team of engineers who care about craft — we don't take on more projects than we can do exceptionally well.
+        <p class="text-slate max-w-xs text-sm">Building high-performance online stores, websites, and mobile
+          applications for the next generation of brands.</p>
+        <p class="text-slate/60 mt-6 text-xs tracking-wide uppercase">
+          <span class="fa fa-location-pin text-sm"></span> Konchery Rd, Mulagunnathukavu, Thrissur
         </p>
-        <p class="text-pa-muted leading-relaxed mb-8">
-          We work best with businesses that want a long-term technical partner, not just a vendor. Our clients treat us as their engineering team — and we take that seriously.
-        </p>
-        <a href="about.html" class="btn-ghost inline-flex items-center gap-2 text-sm text-pa-muted px-6 py-3 rounded-lg">
-          Learn More About Us <i class="fa-solid fa-arrow-right text-xs" aria-hidden="true"></i>
-        </a>
       </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════
-     LATEST BLOG POSTS
-═══════════════════════════════════════ -->
-<section id="blog" class="py-24 lg:py-32">
-  <div class="max-w-7xl mx-auto px-6 lg:px-12">
-
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14 reveal">
-      <div>
-        <div class="section-label mb-4">Latest Blog Posts</div>
-        <h2 class="text-3xl lg:text-4xl font-bold tracking-tight">Thinking out loud<br /><span class="gradient-text">on software.</span></h2>
-      </div>
-      <a href="blog.html" class="btn-ghost inline-flex items-center gap-2 text-sm text-pa-muted px-6 py-3 rounded-lg w-fit">
-        Read All Posts <i class="fa-solid fa-arrow-right text-xs" aria-hidden="true"></i>
-      </a>
-    </div>
-
-    <div class="grid md:grid-cols-3 gap-6">
-
-      <article class="blog-card glass rounded-2xl p-7 reveal" style="transition-delay:0.1s">
-        <div class="flex items-center gap-2 mb-5">
-          <span class="tag">Architecture</span>
-          <span class="text-xs text-pa-muted font-mono ml-auto">Jun 12, 2025</span>
+      <div class="grid grid-cols-3 gap-12">
+        <!-- <div class="space-y-4">
+          <h4 class="text-xs font-bold uppercase tracking-widest text-slate/40">Sitemap</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:text-brand transition-colors">Home</a></li>
+            <li><a href="#services" class="hover:text-brand transition-colors">Services</a></li>
+            <li><a href="#portfolio" class="hover:text-brand transition-colors">Work</a></li>
+          </ul>
+        </div> -->
+        <div class="space-y-4">
+          <h4 class="text-xs font-bold uppercase tracking-widest text-slate/40">Social</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:text-brand transition-colors">Instagram</a></li>
+            <li><a href="#" class="hover:text-brand transition-colors">LinkedIn</a></li>
+            <li><a href="#" class="hover:text-brand transition-colors">Twitter</a></li>
+          </ul>
         </div>
-        <h3 class="font-semibold text-pa-text text-base mb-3 leading-snug">When to build a SaaS product vs. a custom internal tool</h3>
-        <p class="text-sm text-pa-muted leading-relaxed mb-5">The decision framework we walk every client through before writing a single line of code.</p>
-        <a href="blog.html" class="inline-flex items-center gap-1.5 text-xs text-pa-accent font-medium hover:gap-2.5 transition-all">
-          Read More <i class="fa-solid fa-arrow-right text-xs" aria-hidden="true"></i>
-        </a>
-      </article>
-
-      <article class="blog-card glass rounded-2xl p-7 reveal" style="transition-delay:0.2s">
-        <div class="flex items-center gap-2 mb-5">
-          <span class="tag">AI/ML</span>
-          <span class="text-xs text-pa-muted font-mono ml-auto">May 28, 2025</span>
-        </div>
-        <h3 class="font-semibold text-pa-text text-base mb-3 leading-snug">Integrating LLMs into production apps — 5 lessons we learned</h3>
-        <p class="text-sm text-pa-muted leading-relaxed mb-5">Practical, hard-won lessons from shipping AI features that actually work in production environments.</p>
-        <a href="blog.html" class="inline-flex items-center gap-1.5 text-xs text-pa-accent font-medium hover:gap-2.5 transition-all">
-          Read More <i class="fa-solid fa-arrow-right text-xs" aria-hidden="true"></i>
-        </a>
-      </article>
-
-      <article class="blog-card glass rounded-2xl p-7 reveal" style="transition-delay:0.3s">
-        <div class="flex items-center gap-2 mb-5">
-          <span class="tag">API Design</span>
-          <span class="text-xs text-pa-muted font-mono ml-auto">May 10, 2025</span>
-        </div>
-        <h3 class="font-semibold text-pa-text text-base mb-3 leading-snug">Designing APIs that scale: versioning, pagination, and error handling</h3>
-        <p class="text-sm text-pa-muted leading-relaxed mb-5">How we structure REST APIs at Perfect Apps to be pleasant to consume and painless to evolve.</p>
-        <a href="blog.html" class="inline-flex items-center gap-1.5 text-xs text-pa-accent font-medium hover:gap-2.5 transition-all">
-          Read More <i class="fa-solid fa-arrow-right text-xs" aria-hidden="true"></i>
-        </a>
-      </article>
-
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════
-     CONTACT CTA
-═══════════════════════════════════════ -->
-<section id="contact-cta" class="py-24 lg:py-32 border-t border-pa-border">
-  <div class="max-w-4xl mx-auto px-6 lg:px-12 text-center reveal">
-
-    <div class="glass-strong rounded-3xl p-12 lg:p-16 glow-blue relative overflow-hidden">
-      <!-- Background glow -->
-      <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(79,142,247,0.08) 0%, transparent 60%), radial-gradient(ellipse 50% 50% at 80% 100%, rgba(124,92,252,0.06) 0%, transparent 60%);"></div>
-
-      <div class="relative z-10">
-        <div class="section-label mb-5 justify-center flex">Start a Project</div>
-        <h2 class="text-3xl lg:text-5xl font-bold tracking-tight mb-5">
-          Have a problem worth<br /><span class="gradient-text">solving?</span>
-        </h2>
-        <p class="text-pa-muted text-base lg:text-lg leading-relaxed mb-10 max-w-xl mx-auto">
-          Tell us what you're building. We'll reply within 24 hours with honest thoughts on scope, timeline, and approach.
-        </p>
-
-        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-          <a href="contact.html" class="btn-primary inline-flex items-center justify-center gap-2 text-white text-sm font-semibold px-8 py-4 rounded-xl">
-            Start a Project <i class="fa-solid fa-arrow-right text-xs" aria-hidden="true"></i>
-          </a>
-          <a href="mailto:deffrin@gmail.com" class="btn-ghost inline-flex items-center justify-center gap-2 text-pa-muted text-sm font-medium px-8 py-4 rounded-xl">
-            <i class="fa-solid fa-envelope text-xs" aria-hidden="true"></i>
-            deffrin@gmail.com
-          </a>
-        </div>
-
-        <div class="flex flex-wrap gap-6 justify-center">
-          <div class="flex items-center gap-2 text-xs text-pa-muted">
-            <i class="fa-solid fa-check text-green-400 text-xs" aria-hidden="true"></i>
-            Free consultation
-          </div>
-          <div class="flex items-center gap-2 text-xs text-pa-muted">
-            <i class="fa-solid fa-check text-green-400 text-xs" aria-hidden="true"></i>
-            NDA on request
-          </div>
-          <div class="flex items-center gap-2 text-xs text-pa-muted">
-            <i class="fa-solid fa-check text-green-400 text-xs" aria-hidden="true"></i>
-            24h response
-          </div>
+        <div class="space-y-4">
+          <h4 class="text-xs font-bold uppercase tracking-widest text-slate/40">Legal</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#" class="hover:text-brand transition-colors">Privacy Policy</a></li>
+            <li><a href="#" class="hover:text-brand transition-colors">Terms of Service</a></li>
+          </ul>
         </div>
       </div>
     </div>
-
-  </div>
-</section>
-
-</main>
-
-<!-- ═══════════════════════════════════════
-     FOOTER
-═══════════════════════════════════════ -->
-<footer id="footer" class="border-t border-pa-border py-12">
-  <div class="max-w-7xl mx-auto px-6 lg:px-12">
-    <div class="grid md:grid-cols-4 gap-10 mb-10">
-
-      <div class="md:col-span-2">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-pa-accent to-pa-accent2 flex items-center justify-center">
-            <span class="text-white font-mono font-bold text-sm">P</span>
-          </div>
-          <span class="font-semibold text-pa-text">Perfect Apps</span>
-        </div>
-        <p class="text-sm text-pa-muted leading-relaxed max-w-xs mb-5">
-          A small, highly technical software studio building custom web apps, SaaS products, APIs, and AI-powered solutions for real businesses.
-        </p>
-        <div class="flex gap-3">
-          <a href="#" class="w-9 h-9 rounded-lg border border-pa-border flex items-center justify-center text-pa-muted hover:text-pa-accent hover:border-pa-accent/30 transition-all text-sm">
-            <i class="fa-brands fa-x-twitter"></i>
-          </a>
-          <a href="#" class="w-9 h-9 rounded-lg border border-pa-border flex items-center justify-center text-pa-muted hover:text-pa-accent hover:border-pa-accent/30 transition-all text-sm">
-            <i class="fa-brands fa-linkedin-in"></i>
-          </a>
-          <a href="#" class="w-9 h-9 rounded-lg border border-pa-border flex items-center justify-center text-pa-muted hover:text-pa-accent hover:border-pa-accent/30 transition-all text-sm">
-            <i class="fa-brands fa-github"></i>
-          </a>
-        </div>
-      </div>
-
-      <div>
-        <div class="text-xs font-semibold text-pa-text mb-4 tracking-wider uppercase">Navigation</div>
-        <ul class="space-y-2.5">
-          <li><a href="#" class="text-sm text-pa-muted hover:text-pa-text transition-colors">Home</a></li>
-          <li><a href="work.html" class="text-sm text-pa-muted hover:text-pa-text transition-colors">Work</a></li>
-          <li><a href="use-cases.html" class="text-sm text-pa-muted hover:text-pa-text transition-colors">Use Cases</a></li>
-          <li><a href="about.html" class="text-sm text-pa-muted hover:text-pa-text transition-colors">About</a></li>
-          <li><a href="blog.html" class="text-sm text-pa-muted hover:text-pa-text transition-colors">Blog</a></li>
-          <li><a href="contact.html" class="text-sm text-pa-muted hover:text-pa-text transition-colors">Contact</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <div class="text-xs font-semibold text-pa-text mb-4 tracking-wider uppercase">Contact</div>
-        <ul class="space-y-2.5">
-          <li class="text-sm text-pa-muted">deffrin@gmail.com</li>
-          <li class="text-sm text-pa-muted">Thrissur, Kerala, India</li>
-          <li class="text-sm text-pa-muted font-mono">perfectapps.in</li>
-        </ul>
-      </div>
-
-    </div>
-
-    <div class="gradient-line mb-6"></div>
-
-    <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-      <span class="text-xs text-pa-muted font-mono">© 2026 Perfect Apps · All rights reserved</span>
-    </div>
-  </div>
-</footer>
-
-
-<!-- ═══════════════════════════════════════
-     SCRIPTS
-═══════════════════════════════════════ -->
-<script>
-  // ── Nav scroll ──
-  const navBar = document.getElementById('nav-bar');
-  window.addEventListener('scroll', () => {
-    navBar.classList.toggle('scrolled', window.scrollY > 40);
-  });
-
-  // ── Mobile menu ──
-  const menuToggle = document.getElementById('menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-  menuToggle.addEventListener('click', () => {
-    const isOpen = mobileMenu.classList.toggle('open');
-    menuToggle.setAttribute('aria-expanded', isOpen);
-  });
-
-  // ── Scroll reveal ──
-  const reveals = document.querySelectorAll('.reveal');
-  const revealObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-  reveals.forEach(r => revealObs.observe(r));
-
-  // ── Panel parallax on mouse ──
-  const panels = document.getElementById('hero-panels');
-  if (panels) {
-    document.addEventListener('mousemove', (e) => {
-      const cx = window.innerWidth / 2;
-      const cy = window.innerHeight / 2;
-      const dx = (e.clientX - cx) / cx;
-      const dy = (e.clientY - cy) / cy;
-
-      const p1 = document.getElementById('panel-1');
-      const p2 = document.getElementById('panel-2');
-      const p3 = document.getElementById('panel-3');
-      if (p1) p1.style.transform = `translate(${dx * -10}px, ${dy * -6}px)`;
-      if (p2) p2.style.transform = `translate(${dx * 12}px, ${dy * 8}px)`;
-      if (p3) p3.style.transform = `translate(${dx * 6}px, ${dy * -10}px)`;
-    });
-  }
-
-</script>
+  </footer>
 
 </body>
+
 </html>
