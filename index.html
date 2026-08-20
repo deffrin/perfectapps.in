@@ -230,9 +230,7 @@
         <!-- Main Product Image -->
         <div
           class="relative z-10 rounded-3xl overflow-hidden shadow-[0_32px_64px_-12px_rgba(0,82,255,0.15)] bg-surface border border-line">
-          <img class="w-full h-auto"
-            src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_1feee890df_a7424b05d35b26a7.png"
-            alt="High-performance e-commerce dashboard and mobile app interface" />
+          <img class="w-full h-auto" src="3.jpg" alt="High-performance e-commerce dashboard and mobile app interface" />
         </div>
 
         <!-- Background Decoration -->
@@ -294,70 +292,118 @@
         <a href="#" class="nav-link relative text-sm font-semibold mt-6 md:mt-0">View All Projects →</a>
       </div>
 
-      <div class="grid md:grid-cols-12 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-6">
 
-        <!-- Project 1 — Large -->
+        <!-- Featured Project -->
         <a href="https://rajadhani.deffrinjoseph.com/"
-          class="portfolio-item md:col-span-7 md:row-span-2 group block relative rounded-3xl overflow-hidden aspect-[4/3]">
+          class="portfolio-item md:col-span-7 group relative block overflow-hidden rounded-[28px] aspect-[4/3] bg-gray-100">
 
-          <img
-            class="portfolio-img w-full h-full object-cover transition-all duration-1000 grayscale-[0.3] group-hover:scale-105"
-            src="rajadhani-furniture.png" alt="Rajadhani Furniture website" />
+          <img src="rajadhani-furniture.png" alt="Rajadhani Furniture website"
+            class="portfolio-img absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]" />
 
-          <div
-            class="portfolio-overlay absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-10">
-            <span class="text-white text-3xl font-semibold">
+          <!-- Gradient -->
+          <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent"></div>
+
+          <!-- Content -->
+          <div class="absolute inset-x-0 bottom-0 p-7 md:p-9">
+
+            <div class="mb-3 flex items-center gap-2">
+              <span
+                class="inline-flex rounded-full bg-white/15 backdrop-blur-md px-3 py-1 text-xs font-medium text-white border border-white/20">
+                Featured Project
+              </span>
+            </div>
+
+            <h3 class="text-2xl md:text-3xl font-semibold tracking-tight text-white">
               Rajadhani Furniture
-            </span>
-            <span class="text-white/70">
-              Website Development • WhatsApp Integration
-            </span>
+            </h3>
+
+            <p class="mt-1 text-sm md:text-base text-white/70">
+              Website Development · WhatsApp Integration
+            </p>
+
+          </div>
+
+          <!-- Arrow -->
+          <div class="absolute top-6 right-6 w-11 h-11 rounded-full bg-white/90 flex items-center justify-center
+             opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0
+             transition-all duration-300">
+
+            <i class="fa-solid fa-arrow-up-right-from-square text-sm text-gray-900"></i>
+
           </div>
 
         </a>
 
 
-        <!-- Project 2 -->
-        <a href="https://cherukatha.com"
-          class="portfolio-item md:col-span-5 group block relative rounded-3xl overflow-hidden aspect-[4/3]">
+        <!-- Right Column -->
+        <div class="md:col-span-5 grid grid-cols-1 gap-5 md:gap-6">
 
-          <img
-            class="portfolio-img w-full h-full object-cover object-left transition-all duration-1000 grayscale-[0.3] group-hover:scale-105"
-            src="cherukatha.png" alt="Cherukatha.com - Read Malayalam Short Stories" />
+          <!-- Project 2 -->
+          <a href="https://cherukatha.com"
+            class="portfolio-item group relative block overflow-hidden rounded-[28px] aspect-[16/10] bg-gray-100">
 
-          <div
-            class="portfolio-overlay absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
-            <span class="text-white text-xl font-semibold">
-              Cherukatha.com
-            </span>
-            <span class="text-white/70">
-              Web App for Malayalam Short Stories
-            </span>
-          </div>
+            <img src="cherukatha.png" alt="Cherukatha.com - Read Malayalam Short Stories" class="absolute inset-0 w-full h-full object-cover object-left
+               transition-transform duration-700 ease-out group-hover:scale-[1.04]" />
 
-        </a>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/5 to-transparent"></div>
+
+            <div class="absolute inset-x-0 bottom-0 p-6">
+
+              <h3 class="text-xl md:text-2xl font-semibold text-white">
+                Cherukatha.com
+              </h3>
+
+              <p class="mt-1 text-sm text-white/70">
+                Malayalam Short Stories Platform
+              </p>
+
+            </div>
+
+            <div class="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/90
+               flex items-center justify-center
+               opacity-0 translate-y-2
+               group-hover:opacity-100 group-hover:translate-y-0
+               transition-all duration-300">
+
+              <i class="fa-solid fa-arrow-up-right-from-square text-xs text-gray-900"></i>
+
+            </div>
+
+          </a>
 
 
-        <!-- Project 3 -->
-        <a href="https://formrecipe.com"
-          class="portfolio-item md:col-span-5 group block relative rounded-3xl overflow-hidden aspect-[4/3]">
+          <!-- Project 3 -->
+          <a href="https://formrecipe.com"
+            class="portfolio-item group relative block overflow-hidden rounded-[28px] aspect-[16/10] bg-gray-100">
 
-          <img
-            class="portfolio-img w-full h-full object-cover transition-all duration-1000 grayscale-[0.3] group-hover:scale-105"
-            src="formrecipe-demo-thumbnail.png" alt="FormRecipe.com online form builder" />
+            <img src="formrecipe-demo-thumbnail.png" alt="FormRecipe.com online form builder" class="absolute inset-0 w-full h-full object-cover
+               transition-transform duration-700 ease-out group-hover:scale-[1.04]" />
 
-          <div
-            class="portfolio-overlay absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
-            <span class="text-white text-xl font-semibold">
-              Form Recipe
-            </span>
-            <span class="text-white/70">
-              Online Form Builder
-            </span>
-          </div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/5 to-transparent"></div>
 
-        </a>
+            <div class="absolute inset-x-0 bottom-0 p-6">
 
+              <h3 class="text-xl md:text-2xl font-semibold text-white">
+                Form Recipe
+              </h3>
+
+              <p class="mt-1 text-sm text-white/70">
+                Advanced Online Form Builder
+              </p>
+
+            </div>
+
+            <div class="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/90
+               flex items-center justify-center
+               opacity-0 translate-y-2
+               group-hover:opacity-100 group-hover:translate-y-0
+               transition-all duration-300">
+
+              <i class="fa-solid fa-arrow-up-right-from-square text-xs text-gray-900"></i>
+            </div>
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -576,7 +622,7 @@
   </section>
 
   <!-- CTA / Contact Section -->
-  <section id="contact" class="py-40 px-6 bg-brand text-white">
+  <section id="contact" class="py-40 px-6 bg-[#241a9a] text-white">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12">
       <h2 class="text-large font-bold">Ready to grow?</h2>
       <a href="https://wa.me/919946218608?text=Hi%2C+I%27d+like+to+work+with+you+for+my+business"
@@ -625,7 +671,181 @@
       </div>
     </div>
   </footer>
+  <!-- Voice Introduction Widget -->
+  <div id="voiceWidget"
+    class="fixed bottom-5 right-5 z-[9999] w-[320px] rounded-2xl border border-gray-200 bg-white/95 p-3 shadow-2xl backdrop-blur-xl transition-all duration-300 sm:bottom-6 sm:right-6">
 
+    <div class="flex items-center gap-3">
+
+      <!-- Happy Emoji -->
+      <div class="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full  text-3xl">
+        😊
+      </div>
+
+      <!-- Text -->
+      <div class="min-w-0 flex-1">
+        <div class="text-sm font-semibold text-gray-900">
+          Why Perfect Apps?
+        </div>
+
+        <div id="voiceStatus" class="mt-0.5 text-xs text-gray-500 flex items-center">
+
+          <!-- Voice Waves -->
+          <div id="voiceWaves" class="mr-2 flex h-5 items-center gap-[2px]">
+            <span class="voice-bar h-1.5 w-[3px] rounded-full bg-blue-600"></span>
+            <span class="voice-bar h-2.5 w-[3px] rounded-full bg-blue-600"></span>
+            <span class="voice-bar h-4 w-[3px] rounded-full bg-blue-600"></span>
+            <span class="voice-bar h-2.5 w-[3px] rounded-full bg-blue-600"></span>
+            <span class="voice-bar h-1.5 w-[3px] rounded-full bg-blue-600"></span>
+          </div>
+          <div>
+            Listen Now</div>
+        </div>
+      </div>
+
+
+      <!-- Play / Pause -->
+      <button id="voicePlay" type="button"
+        class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gray-900 text-sm text-white transition hover:scale-105 hover:bg-gray-800"
+        aria-label="Play introduction">
+        ▶
+      </button>
+
+    </div>
+
+
+    <!-- Close -->
+    <button id="voiceClose" type="button"
+      class="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-gray-900 text-xs text-white shadow-md transition hover:scale-110"
+      aria-label="Close">
+      ×
+    </button>
+
+
+    <!-- Audio -->
+    <audio id="bgAudio" preload="metadata">
+      <source src="background.wav" type="audio/wav">
+    </audio>
+
+  </div>
+
+
+  <style>
+    .voice-bar {
+      transition: height 0.2s ease;
+    }
+
+    .voice-widget-playing .voice-bar {
+      animation: voiceWave 0.7s ease-in-out infinite;
+    }
+
+    .voice-widget-playing .voice-bar:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .voice-widget-playing .voice-bar:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+
+    .voice-widget-playing .voice-bar:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+
+    .voice-widget-playing .voice-bar:nth-child(4) {
+      animation-delay: 0.1s;
+    }
+
+    .voice-widget-playing .voice-bar:nth-child(5) {
+      animation-delay: 0s;
+    }
+
+    @keyframes voiceWave {
+
+      0%,
+      100% {
+        transform: scaleY(0.5);
+      }
+
+      50% {
+        transform: scaleY(1.5);
+      }
+    }
+  </style>
+
+
+  <script>
+    const widget = document.getElementById('voiceWidget');
+    const audio = document.getElementById('bgAudio');
+    const playButton = document.getElementById('voicePlay');
+    const closeButton = document.getElementById('voiceClose');
+    const status = document.getElementById('voiceStatus');
+
+    playButton.addEventListener('click', async () => {
+
+      if (audio.paused) {
+
+        try {
+
+          await audio.play();
+
+          widget.classList.add('voice-widget-playing');
+
+          playButton.textContent = '❚❚';
+          playButton.setAttribute('aria-label', 'Pause introduction');
+
+          status.textContent = 'Playing...';
+
+        } catch (error) {
+
+          console.error('Audio playback failed:', error);
+
+        }
+
+      } else {
+
+        audio.pause();
+
+        widget.classList.remove('voice-widget-playing');
+
+        playButton.textContent = '▶';
+        playButton.setAttribute('aria-label', 'Play introduction');
+
+        status.textContent = 'Paused';
+      }
+
+    });
+
+
+    // Close widget
+    closeButton.addEventListener('click', () => {
+
+      audio.pause();
+      audio.currentTime = 0;
+
+      widget.classList.remove('voice-widget-playing');
+
+      widget.classList.add('translate-y-5', 'opacity-0');
+
+      setTimeout(() => {
+        widget.remove();
+      }, 300);
+
+    });
+
+
+    // Audio finished
+    audio.addEventListener('ended', () => {
+
+      widget.classList.remove('voice-widget-playing');
+
+      playButton.textContent = '▶';
+
+      playButton.setAttribute('aria-label', 'Play introduction');
+
+      status.textContent = 'Listen again';
+
+    });
+  </script>
 </body>
 
 </html>
