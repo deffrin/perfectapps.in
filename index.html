@@ -159,6 +159,9 @@
 
   <!-- Mobile Menu -->
   <div id="mobileMenu" class="hidden fixed inset-0 z-[60] bg-white/95 backdrop-blur-md pt-20 px-6">
+    <button id="mobileMenuClose" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-lg border border-line text-lg" aria-label="Close menu">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
     <nav class="flex flex-col gap-6 text-lg font-semibold text-ink">
       <a href="#services" class="mobile-nav-link py-2 border-b border-line">Services</a>
       <a href="#portfolio" class="mobile-nav-link py-2 border-b border-line">Our Work</a>
@@ -823,6 +826,11 @@
       link.addEventListener('click', () => {
         mobileMenu.classList.add('hidden');
       });
+    });
+
+    const mobileMenuClose = document.getElementById('mobileMenuClose');
+    mobileMenuClose.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
     });
 
     // Voice widget
