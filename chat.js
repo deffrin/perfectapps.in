@@ -28,6 +28,8 @@
   var AUTO_OPEN_MOBILE   = true;   // false = bubble only on phones
   var REOPEN_AFTER_CLOSE = false;  // false = once they close it, stay closed this session
   var EVENT_NAME         = 'perfectapps_landing';
+  var PLAY_SOUND         = true;   // chime when the panel opens itself
+  var SOUND_VOLUME       = 0.12;   // 0-1; keep it quiet, it is unsolicited
 
   /* ────────────────────────────────────────────────────────────────────── */
 
@@ -53,6 +55,57 @@
   }
   function remember() {
     try { sessionStorage.setItem('chatDismissed', '1'); } catch (e) { /* private mode */ }
+  }
+
+  /* ── Notification chime ──────────────────────────────────────────────────
+   * Synthesised with Web Audio rather than loaded as a file: no asset, no
+   * request, a few hundred bytes of code.
+   *
+   * Browsers refuse to start audio until the page has had a real user gesture,
+   * so an AudioContext created on a cold landing stays "suspended" and the
+   * chime is silently skipped. To make it work as often as it legitimately
+   * can, we unlock the context on the visitor's first interaction — if they
+   * click, tap or press a key before the panel opens, the chime plays.
+   */
+  var AC = window.AudioContext || window.webkitAudioContext;
+  var actx = null;
+
+  function unlockAudio() {
+    if (actx || !AC) return;
+    try {
+      actx = new AC();
+      if (actx.state === 'suspended' && typeof actx.resume === 'function') {
+        actx.resume().catch(function () {});
+      }
+    } catch (e) { actx = null; }
+  }
+
+  if (PLAY_SOUND && AC) {
+    ['pointerdown', 'keydown', 'touchstart'].forEach(function (evt) {
+      window.addEventListener(evt, unlockAudio, { once: true, passive: true });
+    });
+  }
+
+  function chime() {
+    if (!PLAY_SOUND || !AC) return;
+    unlockAudio();
+    if (!actx || actx.state !== 'running') return;  // autoplay still blocked
+    try {
+      var t = actx.currentTime;
+      [[880, 0], [1174.66, 0.1]].forEach(function (note) {
+        var osc = actx.createOscillator();
+        var gain = actx.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = note[0];
+        gain.gain.setValueAtTime(0.0001, t + note[1]);
+        gain.gain.exponentialRampToValueAtTime(SOUND_VOLUME, t + note[1] + 0.015);
+        gain.gain.exponentialRampToValueAtTime(0.0001, t + note[1] + 0.3);
+        osc.connect(gain);
+        gain.connect(actx.destination);
+        osc.start(t + note[1]);
+        osc.stop(t + note[1] + 0.32);
+      });
+    } catch (e) { /* never let a chime break the chat */ }
   }
 
   window.Tawk_API = window.Tawk_API || {};
@@ -87,6 +140,7 @@
       if (window.Tawk_API && typeof window.Tawk_API.maximize === 'function') {
         weOpenedIt = true;
         window.Tawk_API.maximize();
+        chime();
       }
     }, AUTO_OPEN_DELAY);
   };
