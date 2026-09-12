@@ -72,6 +72,7 @@
   var isMobile = window.matchMedia('(max-width: 640px)').matches;
   var tawkReady = false;
   var card = null;
+  var userOpenedChat = false;   // true only once the visitor maximises the panel
 
   function pageKind() {
     if (onGreetPage) return 'homepage';
@@ -238,9 +239,17 @@
   };
 
   // If the visitor opens the chat themselves, the card is redundant.
-  window.Tawk_API.onChatMaximized = function () { hideCard(false); };
+  window.Tawk_API.onChatMaximized = function () {
+    userOpenedChat = true;
+    hideCard(false);
+  };
+
+  // Tawk fires onChatMinimized when the widget first renders as a bubble, not
+  // just when a visitor closes the panel. Only treat it as a dismissal if they
+  // had actually opened the chat, otherwise the greeting suppresses itself
+  // before it is ever shown.
   window.Tawk_API.onChatMinimized = function () {
-    if (!REOPEN_AFTER_CLOSE) remember();
+    if (userOpenedChat && !REOPEN_AFTER_CLOSE) remember();
   };
 
   function inject() {
