@@ -50,7 +50,7 @@
 
   /* ── 3. Behaviour ────────────────────────────────────────────────────── */
   var GREET_PATHS   = ['/', '/index.html'];  // where the card appears
-  var GREET_DELAY   = 4000;   // ms after page load before it slides in
+  var GREET_DELAY   = 2000;   // ms after page load before it slides in
   var GREET_MOBILE  = true;   // false = no card on phones
   var OPEN_PANEL_ON_GREET_CLICK = true;  // false = just show the Tawk bubble
   var REOPEN_AFTER_CLOSE = false;        // false = dismissed stays dismissed this session
