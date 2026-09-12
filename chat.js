@@ -8,13 +8,12 @@
 (function () {
   'use strict';
 
-  /* ── 1. Paste your Tawk.to embed path here ───────────────────────────────
-   * Tawk dashboard → Administration → Chat Widget → copy the two ids out of
-   * the embed snippet, which looks like:
-   *     https://embed.tawk.to/64f1a2b3c4d5e6f7a8b9c0d1/1h9abcdef
-   *                           └── PROPERTY_ID ──────┘ └ WIDGET_ID ┘
+  /* ── 1. Tawk.to property ─────────────────────────────────────────────────
+   * The two ids are the property id and widget id from
+   * Tawk dashboard → Administration → Chat Widget. They are public by design
+   * (they ship in the page to every visitor); they are not credentials.
    */
-  var TAWK_SRC = 'https://embed.tawk.to/PROPERTY_ID/WIDGET_ID';
+  var TAWK_SRC = 'https://embed.tawk.to/6aa4f73a0f09ed34497bc905/1k2a6bfn2';
 
   /* ── 2. Behaviour ────────────────────────────────────────────────────── */
   var AUTO_OPEN_PATHS   = ['/', '/index.html'];  // auto-open only here
@@ -24,7 +23,7 @@
 
   /* ────────────────────────────────────────────────────────────────────── */
 
-  if (TAWK_SRC.indexOf('PROPERTY_ID') !== -1) {
+  if (/PROPERTY_ID|WIDGET_ID/.test(TAWK_SRC)) {
     console.warn('[chat] Tawk.to is not configured yet — set TAWK_SRC in /chat.js');
     return;
   }
