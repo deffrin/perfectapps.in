@@ -59,33 +59,15 @@
   ]
 }
   </script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="shortcut icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: { sans: ['Inter', 'sans-serif'] },
-          colors: {
-            ink: '#0f172a',
-            slate: '#475569',
-            line: '#e2e8f0',
-            paper: '#ffffff',
-            surface: '#f8fafc',
-            brand: '#0052ff',
-          },
-        },
-      },
-    };
-  </script>
   <style>
     html { overflow-x: clip; scroll-behavior: smooth; }
     body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; overflow-x: clip; }
@@ -139,7 +121,7 @@
         <a href="https://wa.me/919946218608?text=Hi%2C+I%27d+like+to+get+a+quote+for+a+new+project."
           class="px-4 sm:px-6 py-2.5 bg-brand text-white rounded-lg text-sm font-bold hover:bg-ink transition-all duration-300 shadow-md shadow-brand/20">Get a Quote</a>
         <button id="mobileMenuBtn" class="md:hidden w-10 h-10 flex items-center justify-center rounded-lg border border-line" aria-label="Open menu">
-          <i class="fa-solid fa-bars"></i>
+          <svg class="icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>
         </button>
       </div>
     </div>
@@ -148,7 +130,7 @@
   <!-- Mobile Menu -->
   <div id="mobileMenu" class="hidden fixed inset-0 z-[60] bg-white/95 backdrop-blur-md pt-20 px-6">
     <button id="mobileMenuClose" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-lg border border-line text-lg" aria-label="Close menu">
-      <i class="fa-solid fa-xmark"></i>
+      <svg class="icon" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
     </button>
     <nav class="flex flex-col gap-6 text-lg font-semibold text-ink">
       <a href="/#services" class="mobile-nav-link py-2 border-b border-line">Services</a>
@@ -194,7 +176,7 @@
         </a>
         <p class="text-slate max-w-xs text-sm">Building high-performance online stores, websites, and mobile applications for the next generation of brands.</p>
         <p class="text-slate/60 mt-6 text-xs tracking-wide uppercase">
-          <span class="fa fa-location-pin text-sm"></span> Konchery Rd, Mulagunnathukavu, Thrissur
+          <svg class="icon text-sm" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg> Konchery Rd, Mulagunnathukavu, Thrissur
         </p>
       </div>
       <div class="grid grid-cols-2 sm:grid-cols-3 gap-12">

@@ -1,0 +1,13 @@
+{
+  "name": "perfectapps-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Build tooling for perfectapps.in (static site). Compiles Tailwind to styles.css.",
+  "scripts": {
+    "build:css": "tailwindcss -i src/input.css -o styles.css --minify",
+    "watch:css": "tailwindcss -i src/input.css -o styles.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.17"
+  }
+}

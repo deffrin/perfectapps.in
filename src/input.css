@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Inline SVG icons replacing Font Awesome. Sized with width/height="1em" and
+   painted with currentColor, so Tailwind text utilities (text-xs, text-brand)
+   keep working exactly as they did on the old <i> elements. */
+@layer components {
+  .icon {
+    display: inline-block;
+    vertical-align: -0.125em;
+    flex-shrink: 0;
+  }
+}
